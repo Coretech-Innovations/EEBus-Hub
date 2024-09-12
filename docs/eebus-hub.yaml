@@ -1,0 +1,1426 @@
+openapi: 3.0.0
+info:
+  title: EEBUS-Hub
+  version: 0.0.0
+  description: |-
+    This is a yaml file for the EEBus-Hub
+servers:
+  - url: /api/v1
+tags:
+  - name: SIM
+  - name: EV
+  - name: EVSE
+  - name: CEM
+  - name: Uncontrollable Device
+  - name: EnergyMeter
+paths:
+  /sim:
+    post:
+      tags:
+        - SIM
+      summary: An Api to handle different actions with Simulation (start,stop,reset)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/simulationParameters"
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: Unknown action
+      
+    get:
+      tags:
+        - SIM
+      summary: Get Simulation status
+      responses:
+        '200':
+          description: Successful response
+  /sim/undo:
+    post:
+      tags:
+        - SIM
+      summary: Undo the last action
+      responses:
+        '200':
+          description: Successful response
+  /sim/redo:
+    post:
+      tags:
+        - SIM
+      summary: Redo last action has been Undone
+      responses:
+        '200':
+          description: Successful response
+  /sim/save:
+    post:
+      tags:
+        - SIM
+      summary: Save the current state to be exported, This also clear the Undone action
+      responses:
+        '200':
+          description: Successful response
+  /sim/export:
+    get:
+      tags:
+        - SIM
+      summary: Export the current configuration to json file
+      responses:
+        '404':
+          description: No actions found to be exported
+        '500':
+          description: Failed to encode actions to json
+        '200':
+          description: Successful response
+  /sim/import:
+    post:
+      tags:
+        - SIM
+      summary: Import Configuration to be loaded in the system
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: File not found, or File size mismatch
+        '500': 
+          description: Failed to load file, Failed to parse Json
+  /ev/add:
+    post:
+      tags:
+        - EV
+      summary: Add New EV
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EVConfig" 
+      responses:
+        '200':
+          description: Successful response
+  /ev/list:
+    get:
+      tags:
+        - EV
+      summary: List all existed EVs
+      responses:
+        '200':
+          description: Successful response
+  /ev/{evId}:
+    patch:
+      tags:
+        - EV
+      summary: Modify EV
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EVConfig"
+      parameters:
+        - name: evId
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: 2
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: invalid ID number
+        '404':
+          description: no existing EV with this ID number
+    delete:
+      tags:
+        - EV
+      summary: Delete EV
+      parameters:
+        - name: evId
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: 2
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: invalid ID number
+        '404':
+          description: no existing EV with this ID number
+
+  /ev/{evId}/evse/{evseId}:
+    post:
+      tags:
+        - EV
+      summary: Connect EV to existing EVSE
+      parameters:
+        - name: evId
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: 2
+        - name: evseId
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: invalid ID number
+        '404':
+          description: no existing EV with this ID number
+    delete:
+      tags:
+        - EV
+      summary: Disconnect EV from EVSE
+      parameters:
+        - name: evId
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: 2
+        - name: evseId
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: invalid ID number
+        '404':
+          description: no existing EV with this ID number
+
+  /api/v1/ev/{evId}/image:
+    post:
+      tags:
+        - EV
+      summary: Upload Image
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Image"
+      parameters:
+        - name: evId
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: invalid ID number
+        '404':
+          description: no existing EV with this ID number
+    get:
+      tags:
+        - EV
+      summary: Get Image
+      parameters:
+        - name: evId
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: invalid ID number
+        '404':
+          description: no existing EV with this ID number,  no image to get
+    delete:
+      tags:
+        - EV
+      summary: Delete Image
+      parameters:
+        - name: evId
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: invalid ID number
+        '404':
+          description: no existing EV with this ID number, no Image to delete
+  /ev/{evId}/LoadControlLimit:
+    get:
+      tags:
+        - EV
+      summary: EV LoadControlLimitListData
+      parameters:
+        - name: evId
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: 2
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: invalid ID number
+        '404':
+          description: no existing EV with this ID number
+  /ev/{evId}/ElectricalConnectionPermitted:
+    get:
+      tags:
+        - EV
+      summary: EV ElectricalConnectionPermittedValueSetListData
+      parameters:
+        - name: evId
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: invalid ID number
+        '404':
+          description: no existing EV with this ID number
+  /ev/{evId}/LastHeartbeatData:
+    get:
+      tags:
+        - EV
+      summary: EV LastHeartbeatData sent from CEM
+      parameters:
+        - name: evId
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: invalid ID number
+        '404':
+          description: no existing EV with this ID number
+        '500': 
+          description: could not fetch last Heartbeat
+  /ev/{evId}/EnergyGuardState:
+    get:
+      tags:
+        - EV
+      summary: EV gets EnergyGuardState 
+      parameters:
+        - name: evId
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: 0
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: invalid ID number
+        '404':
+          description: no existing EV with this ID number
+        '500': 
+          description: could not fetch Energy Guard State
+  /ev/{evId}/MeasurementData:
+    get:
+      tags:
+        - EV
+      summary: EV MeasurementData
+      parameters:
+        - name: evId
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: invalid ID number
+        '404':
+          description: no existing EV with this ID number
+
+  /ev/{evId}/MeasurementConstraints:
+    get:
+      tags:
+        - EV
+      summary: EV MeasurementConstraints
+      parameters:
+        - name: evId
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '501':
+          description: not implemented yet
+  /ev/{evId}/StateOfCharge:
+    get:
+      tags:
+        - EV
+      summary: EV StateOfCharge
+      parameters:
+        - name: evId
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: invalid ID number
+        '404':
+          description: no existing EV with this ID number
+  /ev/{evId}/StateOfHealth:
+    get:
+      tags:
+        - EV
+      summary: EV StateOfHealth
+      parameters:
+        - name: evId
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '501':
+          description: not implemented yet
+  
+  /ev/{evId}/TravelRange:
+    get:
+      tags:
+        - EV
+      summary: EV TravelRange
+      parameters:
+        - name: evId
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '501':
+          description: not implemented yet
+  /ev/{evId}/NominalCapacity:
+    get:
+      tags:
+        - EV
+      summary: EV NominalCapacity
+      parameters:
+        - name: evId
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '501':
+          description: not implemented yet
+  /evse/add:
+    post:
+      tags:
+        - EVSE
+      summary: Add EVSE
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EVSEConfig"
+      responses:
+        '200':
+          description: Successful response
+        
+  /evse/addExt:
+    post:
+      tags:
+        - EVSE
+      summary: Add External EVSE
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExtDeviceConfig"
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: Invalild SKI
+  /evseExt:
+    get:
+      tags:
+        - EVSE
+      summary: Get External EVSE
+      responses:
+        '200':
+          description: Successful response
+  /evseExt/{evseId}:
+    delete:
+      tags:
+        - EVSE
+      summary: Delete External EVSE
+      parameters:
+        - name: evseId
+          in: path
+          schema:
+            type: integer
+            example: 1
+          required: true
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: invalid ID number
+        '404':
+          description: no existing external EVSE with this ID number
+         
+    patch:
+      tags:
+        - EVSE
+      summary: Modify External EVSE
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExtDeviceConfig"
+      parameters:
+        - name: evseId
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: invalid ID number
+        '404':
+          description: no existing external EVSE with this ID number
+  /evse/{evseId}/manufacturerData:
+    get:
+      tags:
+        - EVSE
+      summary: Get manufacturer Data
+      parameters:
+        - name: evseId
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: invalid ID number
+        '404':
+          description: no existing EVSE with this ID number
+        
+  /evse/{evseId}:
+    patch:
+      tags:
+        - EVSE
+      summary: Modify EVSE
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EVSEConfig"
+      parameters:
+        - name: evseId
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: invalid ID number
+        '404':
+          description: no existing EVSE with this ID number
+    delete:
+      tags:
+        - EVSE
+      summary: Delete EVSE
+      parameters:
+        - name: evseId
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: invalid ID number
+        '404':
+          description: no existing EVSE with this ID number
+  /evse/{evseId}/errorState:
+    post:
+      tags:
+        - EVSE
+      summary: Set Error Code
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrorState"
+      parameters:
+        - name: evseId
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: invalid ID number
+        '404':
+          description: no existing EVSE with this ID number
+        '500':
+          description: could not set error state
+    get:
+      tags:
+        - EVSE
+      summary: Get Error Code
+      parameters:
+        - name: evseId
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: invalid ID number
+        '404':
+          description: no existing EVSE with this ID number
+        '500':
+          description: could not get error state
+    delete:
+      tags:
+        - EVSE
+      summary: Clear Error Code
+      parameters:
+        - name: evseId
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: invalid ID number
+        '404':
+          description: no existing EVSE with this ID number
+        '500':
+          description: could not clear error state
+  /080/api/v1/evse/{evseId}/image:
+    post:
+      tags:
+        - EVSE
+      summary: Upload Image
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Image"
+      parameters:
+        - name: evseId
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: invalid ID number
+        '404':
+          description: no existing EVSE with this ID number
+    get:
+      tags:
+        - EVSE
+      summary: Get Image
+      parameters:
+        - name: evseId
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: invalid ID number
+        '404':
+          description: no existing EVSE with this ID number, no image to get
+    delete:
+      tags:
+        - EVSE
+      summary: Delete Image
+      parameters:
+        - name: evseId
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: invalid ID number
+        '404':
+          description: no existing EVSE with this ID number, no image to delete
+  /evse/list:
+    get:
+      tags:
+        - EVSE
+      summary: List all EVSEs
+      responses:
+        '200':
+          description: Successful response
+  /evse/{evseId}/cem:
+    post:
+      tags:
+        - EVSE
+      summary: Trust EVSE with CEM
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                remoteSKI:
+                  type: string
+      parameters:
+        - name: evseId
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: invalid ID number, invalid remote ski
+        '404':
+          description: no existing EVSE with this ID number
+    delete:
+      tags:
+        - EVSE
+      summary: unTrust cem from EVSE
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                remoteSKI:
+                  type: string
+      parameters:
+        - name: evseId
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: invalid ID number, invalid remote ski
+        '404':
+          description: no existing EVSE with this ID number
+  /cem/add:
+    post:
+      tags:
+        - CEM
+      summary: Add CEM
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CEMConfig"
+      responses:
+        '200':
+          description: Successful response
+  /cem/addExt:
+    post:
+      tags:
+        - CEM
+      summary: Add External CEM
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExtDeviceConfig"
+      responses:
+        '200':
+          description: Successful response
+  /cem:
+    get:
+      tags:
+        - CEM
+      summary: Get CEM
+      responses:
+        '200':
+          description: Successful response
+    delete:
+      tags:
+        - CEM
+      summary: Delete CEM
+      responses:
+        '200':
+          description: Successful response
+  /cemExt:
+    patch:
+      tags:
+        - CEM
+      summary: Modify external CEM
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExtDeviceConfig"
+      responses:
+        '200':
+          description: Successful response
+        '404':
+          description: no external cem found
+    get:
+      tags:
+        - CEM
+      summary: Get External CEM
+      responses:
+        '200':
+          description: Successful response
+    delete:
+      tags:
+        - CEM
+      summary: Delete external CEM
+      responses:
+        '200':
+          description: Successful response
+        '404':
+          description: no external cem found
+  /cem/extDevices:
+    get:
+      tags:
+        - CEM
+      summary: Get external Devices
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: no cem found
+  /cem/extDevices/data:
+    post:
+      tags:
+        - CEM
+      summary: Get external Devices Data
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExtDeviceData"
+      responses:
+        '200':
+          description: Successful response
+        '404':
+          description: no cem found
+        '500':
+          description: server could not fetch this remote data
+        
+  /cem/config/FuseCurrentLimit:
+    patch:
+      tags:
+        - CEM
+      summary: Modify the Fuse Limit
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fuseLimit:
+                  type: integer
+      responses:
+        '200':
+          description: Successful response
+        '404':
+          description: no cem found
+  /cem/trust:
+    post:
+      tags:
+        - CEM
+      summary: trusting new Device to the CEM
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                remoteSki:
+                  type: string
+      responses:
+        '200':
+          description: Successful response
+        '404':
+          description: no cem found
+    delete:
+      tags:
+        - CEM
+      summary: Delete trust of device
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                remoteSki:
+                  type: string
+      responses:
+        '200':
+          description: Successful response
+        '404':
+          description: no cem found
+  /cem/algorithm:
+    post:
+      tags:
+        - CEM
+      summary: Set Algorithm
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                algorithm: fairshare
+                distributionTime: 30
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: invalid Algorithm type, invalid shuffling time
+        '404':
+          description: no cem found
+        
+    get:
+      tags:
+        - CEM
+      summary: Get Algorithm
+      responses:
+        '200':
+          description: Successful response
+        '404':
+          description: no cem found
+      
+  /080/api/v1/cem/image:
+    post:
+      tags:
+        - CEM
+      summary: Upload Image
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Image"
+      responses:
+        '200':
+          description: Successful response
+        '404':
+          description: no cem found
+    get:
+      tags:
+        - CEM
+      summary: Get Image
+      responses:
+        '200':
+          description: Successful response
+        '404':
+          description: no cem found, no image saved to get
+    delete:
+      tags:
+        - CEM
+      summary: Delete Image
+      responses:
+        '200':
+          description: Successful response
+        '404':
+          description: no cem found, no image saved to delete
+  /cem/heartbeat:
+    post:
+      tags:
+        - CEM
+      summary: Heartbeat
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HeartbeatAction"
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: Unknown action
+        '404':
+          description: no cem found
+    get:
+      tags:
+        - CEM
+      summary: Heartbeat State
+      responses:
+        '200':
+          description: Successful response
+        '404':
+          description: no cem found
+  /cem/errorState:
+    post:
+      tags:
+        - CEM
+      summary: Set Error State
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrorState"
+      responses:
+        '200':
+          description: Successful response
+        '404':
+          description: no cem found
+        '500':
+          description: failed to set error state
+        
+    delete:
+      tags:
+        - CEM
+      summary: Clear Error State
+      responses:
+        '200':
+          description: Successful response
+        '404':
+          description: no cem found
+        '500':
+          description: failed to clear error state
+    get:
+      tags:
+        - CEM
+      summary: Get Error State
+      responses:
+        '200':
+          description: Successful response
+        '404':
+          description: no cem found
+        '500':
+          description: failed to get error state
+  /uncontrollabledevice:
+    post:
+      tags:
+        - Uncontrollable Device
+      summary: Add Uncontrollable Device
+      requestBody:
+        content:
+          application/json:
+            schema:
+              anyOf:
+                - $ref: "#/components/schemas/ThreePhaseDevice"
+                - $ref: "#/components/schemas/SinglePhaseDevice"
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: invalid input currents
+    get:
+      tags:
+        - Uncontrollable Device
+      summary: List UncontrollableDevices
+      responses:
+        '200':
+          description: Successful response
+        
+  /uncontrollabledevice/{deviceId}:
+    delete:
+      tags:
+        - Uncontrollable Device
+      summary: Delete Three Phase UncontrollableDevice
+      parameters:
+        - name: deviceId
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: invalid Id number
+        '404':
+          description: invalid id for Uncontrollable device
+    patch:
+      tags:
+        - Uncontrollable Device
+      summary: Modify UncontrollableDevice
+      requestBody:
+        content:
+          application/json:
+            schema:
+              anyOf:
+                - $ref: "#/components/schemas/ThreePhaseDevice"
+                - $ref: "#/components/schemas/SinglePhaseDevice"
+      parameters:
+        - name: deviceId
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: invalid Id number
+        '404':
+          description: invalid id for Uncontrollable device
+  /uncontrollabledevice/{deviceId}/image:
+    post:
+      tags:
+        - Uncontrollable Device
+      summary: Upload Image
+      requestBody:
+        content:
+          application/json:
+            schema:
+             $ref: "#/components/schemas/Image"
+      parameters:
+        - name: deviceId
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: invalid Id number
+        '404':
+          description: invalid id for Uncontrollable device
+    get:
+      tags:
+        - Uncontrollable Device
+      summary: Get Image
+      parameters:
+        - name: deviceId
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: invalid Id number
+        '404':
+          description: invalid id for Uncontrollable device, no image saved to get
+    delete:
+      tags:
+        - Uncontrollable Device
+      summary: Delete Image
+      parameters:
+        - name: deviceId
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          description: invalid Id number
+        '404':
+          description: invalid id for Uncontrollable device, no image saved to delete
+  /energymeter:
+    get:
+      tags:
+        - EnergyMeter
+      summary: Get EnergyMeter readings
+      responses:
+        '200':
+          description: Successful response
+        '404':
+          description: no energymeter found
+
+
+components:
+  schemas:
+    simulationParameters:
+      title: action types
+      type: object
+      properties:
+        action:
+          type: string
+          enum:
+            - start
+            - stop
+            - reset
+            - cfgreset
+    EVConfig:
+      title: possible parameters for new EV
+      type: object
+      properties:
+        dischargingEnable:
+          type: boolean
+        chargingEnable:
+          type: boolean
+        communicationStandard:
+          type: string
+          enum:
+            - iso15118-2ed1
+            - iso15118-2ed2
+            - iso61851
+        asymmetricCharging:
+          type: boolean
+        identification:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+                - eui64
+                - eui48
+            value:
+              type: string
+        device: 
+          type: object
+          properties:
+            name:
+              type: string
+            code:
+              type: string
+            serialNumber:
+              type: string
+            softwareRev:
+              type: string
+            hardwareRev:
+              type: string
+            vendor:
+              type: object
+              properties:
+                name:
+                  type: string
+                code: 
+                  type: string
+            brandName:
+              type: string
+            Manufacturer:
+              type: object
+              properties:
+                label:
+                  type: string
+                description:
+                  type: string
+            powerLimitsRange:
+              type: object
+              properties:
+                min:
+                  type: integer
+                max:
+                  type: integer
+                scale:
+                  type: integer
+            powerLimitsValue:
+              type: object
+              properties:
+                min:
+                  type: integer
+                max:
+                  type: integer
+                scale:
+                  type: integer
+            operatingState:
+              type: string
+              enum:
+                - normalOperation
+                - failure
+            currentLimits:
+              type: object
+              properties:
+                min:
+                  type: integer
+                  description: current in A
+                max:
+                  type: integer
+                  description: current in A
+            chargingCapacity:
+              type: integer
+              description: battery capacity in kW
+            charged:
+              type: integer
+              description: initial charged percentage
+            batteryHealth:
+              type: integer
+              description: battery health in percentage
+    Image:
+      properties:
+        imgBase64:
+          type: string
+    EVSEConfig:
+      title: possible parameters for EVSE Configuration
+      type: object
+      properties:
+        deviceName:
+          type: string
+        deviceCode:
+          type: string
+        vendor:
+          type: object
+          properties:
+            name:
+              type: string
+            code:
+              type: string
+        softwareRev:
+          type: string
+        hardwareRev:
+          type: string
+        brandName:
+          type: string
+        Manufacturer:
+          type: object
+          properties:
+            label:
+              type: string
+            description:
+              type: string
+        deviceModel:
+          type: string
+        serialNumber:
+          type: string
+        imgBase64:
+          type: string
+    ExtDeviceConfig:
+      title: possible parameters for External EVSE, or CEM
+      type: object
+      properties:
+        deviceName:
+          type: string
+        remoteSKI:
+          type: string
+        imgBase64:
+          type: string
+    ErrorState:
+      title: error state parameters
+      type: object
+      properties:
+        lastErrorCode:
+          type: string
+          description: string to represent error code
+    CEMConfig:
+      title: possible parameters for CEM Configuration
+      type: object
+      properties:
+        DeviceName:
+          type: string
+        vendorCode:
+          type: string
+        deviceBrand:
+          type: string
+        deviceModel:
+          type: string
+        serialNumber:
+          type: string
+        imgBase64:
+          type: string
+    ExtDeviceData:
+      title: this is the configuration to request remote data from external device, by entering the address of the external device and the required data
+      type: object
+      properties:
+        reqData:
+          type: string
+          enum:
+            - evseManufacturerData
+            - currentLimits
+            - currentMeasurements
+        entityAddressType:
+          type: object
+          properties:
+            device:
+              type: string
+            entity:
+              type: array
+    HeartbeatAction:
+      title: possible actions to start and stop Heartbeat
+      type: object
+      properties:
+        action:
+          type: string
+          enum:
+            - start
+            - stop
+
+    ThreePhaseDevice:
+      title: configuration for three phase device
+      type: object
+      properties:
+        deviceName:
+          type: string
+        current:
+          type: object
+          properties:
+            a:
+              type: integer
+            b:
+              type: integer
+            c:
+              type: integer
+        powerFactor:
+          type: integer
+        powerStateOn:
+          type: boolean
+    SinglePhaseDevice:
+      title: configuration for single phase device
+      type: object
+      properties:
+        deviceName:
+          type: string
+        current:
+          type: object
+          properties:
+            a:
+              type: integer
+        powerFactor:
+          type: integer
+        powerStateOn:
+          type: boolean
+        

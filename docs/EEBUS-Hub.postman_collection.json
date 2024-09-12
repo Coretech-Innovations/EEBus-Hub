@@ -1,0 +1,2428 @@
+{
+	"info": {
+		"_postman_id": "7b7bd191-3552-47d8-9bff-fdec85c70ec1",
+		"name": "EEBUS-Hub",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34986807"
+	},
+	"item": [
+		{
+			"name": "SIM",
+			"item": [
+				{
+					"name": "Start Simulation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"action\": \"start\",\r\n    \"speedFactor\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/sim",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"sim"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Configuration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"action\": \"cfgreset\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/sim",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"sim"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "undo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/sim/undo",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"sim",
+								"undo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "redo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/sim/redo",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"sim",
+								"redo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/sim/save",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"sim",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Stop Simulation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"action\": \"stop\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/sim",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"sim"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Simulation status",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/sim",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"sim"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "EV",
+			"item": [
+				{
+					"name": "Add EV",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dischargingEnable\": false,\r\n    \"chargingEnable\": true,\r\n    \"communicationStandard\": \"iso15118-2ed1\",\r\n    \"asymmetricCharging\": false,\r\n    \"identification\": {\r\n        \"type\": \"eui64\",\r\n        \"value\": \"12-34-56-78-9A-BC-DE-F0\"\r\n    },\r\n    \"device\": {\r\n        \"name\": \"Taycan\",\r\n        \"code\": \"0001\",\r\n        \"serialNumber\": \"SN1235\",\r\n        \"softwareRev\": \"v1.0\",\r\n        \"hardwareRev\": \"v1.0\",\r\n        \"vendor\": {\r\n            \"name\": \"Porshe\",\r\n            \"code\": \"0011\"\r\n        },\r\n        \"brandName\": \"Porshe\",\r\n        \"manufacturer\": {\r\n            \"label\": \"D214QL1\",\r\n            \"description\": \"EV Car\"\r\n        },\r\n        \"powerLimitsRange\": {\r\n            \"min\": 0,\r\n            \"max\": 0,\r\n            \"scale\": 0\r\n        },\r\n        \"powerLimitsValue\": {\r\n            \"min\": 0,\r\n            \"max\": 0,\r\n            \"scale\": 0\r\n        },\r\n        \"operatingState\": \"normalOperation\"\r\n    },\r\n    \"currentLimits\": {\r\n        \"min\": 2,\r\n        \"max\": 10\r\n    },\r\n    \"chargingCapacity\": 80,\r\n    \"charged\": 20,\r\n    \"batteryHealth\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/ev/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"ev",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modify EV",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"communicationStandard\": \"iso15118-2ed1\",\r\n    \"asymmetricCharging\": false,\r\n    \"identification\": {\r\n        \"type\": \"eui64\",\r\n        \"value\": \"12-34-56-78-9A-BC-DE-F0\"\r\n    },\r\n    \"device\": {\r\n        \"name\": \"I am a device\",\r\n        \"code\": \"This is my code\",\r\n        \"serialNumber\": \"SN1235\",\r\n        \"softwareRev\": \"v1.0\",\r\n        \"hardwareRev\": \"v1.0\",\r\n        \"vendor\": {\r\n            \"name\": \"Vendor\",\r\n            \"code\": \"VENDOR\"\r\n        },\r\n        \"brandName\": \"Brand Name\",\r\n        \"manufacturer\": {\r\n            \"label\": \"Manufacturer Label\",\r\n            \"description\": \"Manufacturer description\"\r\n        },\r\n        \"powerLimitsRange\": {\r\n            \"min\": 0,\r\n            \"max\": 0,\r\n            \"scale\": 0\r\n        },\r\n        \"powerLimitsValue\": {\r\n            \"min\": 0,\r\n            \"max\": 0,\r\n            \"scale\": 0\r\n        },\r\n        \"operatingState\": \"normalOperation\"\r\n    },\r\n    \"currentLimits\": {\r\n        \"min\": 2,\r\n        \"max\": 10\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/ev/:evId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"ev",
+								":evId"
+							],
+							"variable": [
+								{
+									"key": "evId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete EV",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/ev/:evId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"ev",
+								":evId"
+							],
+							"variable": [
+								{
+									"key": "evId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get EV",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/ev/:evId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"ev",
+								":evId"
+							],
+							"variable": [
+								{
+									"key": "evId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List EVs",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/ev/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"ev",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Connect EV to EVSE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/ev/:evId/evse/:evseId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"ev",
+								":evId",
+								"evse",
+								":evseId"
+							],
+							"variable": [
+								{
+									"key": "evId",
+									"value": "2"
+								},
+								{
+									"key": "evseId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Disconnect EV from EVSE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/ev/:evId/evse/:evseId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"ev",
+								":evId",
+								"evse",
+								":evseId"
+							],
+							"variable": [
+								{
+									"key": "evId",
+									"value": "0"
+								},
+								{
+									"key": "evseId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload Image",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "file",
+							"file": {
+								"src": "/C:/Users/mohamed.eltawel/Downloads/image (2).png"
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/ev/:evId/image",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"ev",
+								":evId",
+								"image"
+							],
+							"variable": [
+								{
+									"key": "evId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Image",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/ev/:evId/image",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"ev",
+								":evId",
+								"image"
+							],
+							"variable": [
+								{
+									"key": "evId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Image",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/ev/:evId/image",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"ev",
+								":evId",
+								"image"
+							],
+							"variable": [
+								{
+									"key": "evId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EV LoadControlLimit",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/ev/:evId/LoadControlLimit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"ev",
+								":evId",
+								"LoadControlLimit"
+							],
+							"variable": [
+								{
+									"key": "evId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EV ElectricalConnectionPermitted",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/ev/:evId/ElectricalConnectionPermitted",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"ev",
+								":evId",
+								"ElectricalConnectionPermitted"
+							],
+							"variable": [
+								{
+									"key": "evId",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EV ElectricalConnectionPermitted",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"permittedValue\": {\r\n            \"number\": 0,\r\n            \"scale\": 0\r\n        },\r\n        \"range\": {\r\n            \"min\": {\r\n                \"number\": 2,\r\n                \"scale\": 0\r\n            },\r\n            \"max\": {\r\n                \"number\": 20,\r\n                \"scale\": 0\r\n            }\r\n        }\r\n    },\r\n    {\r\n        \"permittedValue\": {\r\n            \"number\": 0,\r\n            \"scale\": 0\r\n        },\r\n        \"range\": {\r\n            \"min\": {\r\n                \"number\": 2,\r\n                \"scale\": 0\r\n            },\r\n            \"max\": {\r\n                \"number\": 20,\r\n                \"scale\": 0\r\n            }\r\n        }\r\n    },\r\n    {\r\n        \"permittedValue\": {\r\n            \"number\": 0,\r\n            \"scale\": 0\r\n        },\r\n        \"range\": {\r\n            \"min\": {\r\n                \"number\": 2,\r\n                \"scale\": 0\r\n            },\r\n            \"max\": {\r\n                \"number\": 20,\r\n                \"scale\": 0\r\n            }\r\n        }\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/ev/:evId/ElectricalConnectionPermitted",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"ev",
+								":evId",
+								"ElectricalConnectionPermitted"
+							],
+							"variable": [
+								{
+									"key": "evId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EV LastHeartbeatData",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/ev/:evId/LastHeartbeatData",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"ev",
+								":evId",
+								"LastHeartbeatData"
+							],
+							"variable": [
+								{
+									"key": "evId",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EV EnergyGuardState",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/ev/:evId/EnergyGuardState",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"ev",
+								":evId",
+								"EnergyGuardState"
+							],
+							"variable": [
+								{
+									"key": "evId",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EV MeasurementData",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/ev/:evId/MeasurementData",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"ev",
+								":evId",
+								"MeasurementData"
+							],
+							"variable": [
+								{
+									"key": "evId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EV MeasurementData",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/ev/:evId/MeasurementData",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"ev",
+								":evId",
+								"MeasurementData"
+							],
+							"variable": [
+								{
+									"key": "evId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EV MeasurementConstraints",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/ev/:evId/MeasurementConstraints",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"ev",
+								":evId",
+								"MeasurementConstraints"
+							],
+							"variable": [
+								{
+									"key": "evId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EV MeasurementConstraints",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/ev/:evId/MeasurementConstraints",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"ev",
+								":evId",
+								"MeasurementConstraints"
+							],
+							"variable": [
+								{
+									"key": "evId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EV StateOfCharge",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/ev/:evId/StateOfCharge",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"ev",
+								":evId",
+								"StateOfCharge"
+							],
+							"variable": [
+								{
+									"key": "evId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EV StateOfCharge",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/ev/:evId/StateOfCharge",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"ev",
+								":evId",
+								"StateOfCharge"
+							],
+							"variable": [
+								{
+									"key": "evId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EV StateOfHealth",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/ev/:evId/StateOfHealth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"ev",
+								":evId",
+								"StateOfHealth"
+							],
+							"variable": [
+								{
+									"key": "evId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EV StateOfHealth",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/ev/:evId/StateOfHealth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"ev",
+								":evId",
+								"StateOfHealth"
+							],
+							"variable": [
+								{
+									"key": "evId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EV TravelRange",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/ev/:evId/TravelRange",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"ev",
+								":evId",
+								"TravelRange"
+							],
+							"variable": [
+								{
+									"key": "evId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EV TravelRange",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/ev/:evId/TravelRange",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"ev",
+								":evId",
+								"TravelRange"
+							],
+							"variable": [
+								{
+									"key": "evId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EV NominalCapacity",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/ev/:evId/NominalCapacity",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"ev",
+								":evId",
+								"NominalCapacity"
+							],
+							"variable": [
+								{
+									"key": "evId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EV NominalCapacity",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/ev/:evId/NominalCapacity",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"ev",
+								":evId",
+								"NominalCapacity"
+							],
+							"variable": [
+								{
+									"key": "evId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "EVSE",
+			"item": [
+				{
+					"name": "Add EVSE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"deviceName\": \"eSystems EVSE WallBox\",\r\n    \"deviceCode\": \"0002\",\r\n    \"vendor\":{\r\n        \"name\": \"eSystems\",\r\n        \"code\": \"60745\"\r\n    },\r\n    \"softwareRev\": \"0\",\r\n    \"hardwareRev\": \"0\",\r\n    \"brandName\": \"eSystems\",\r\n    \"Manufacturer\":{\r\n        \"label\": \"eSystems\",\r\n        \"description\": \"Charging Station\"\r\n    },\r\n    \"deviceModel\": \"EVSE\",\r\n    \"serialNumber\": \"00000003\",\r\n    \"imgBase64\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/evse/add",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"evse",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add External EVSE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"deviceName\": \"eSystems EVSE WallBox\",\r\n    \"remoteSki\": \"29b65c2cb67cda6343a40391d35d851c6872aed5\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/evse/addExt",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"evse",
+								"addExt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get External EVSE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/evseExt",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"evseExt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete External EVSE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/evseExt/:evseId",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"evseExt",
+								":evseId"
+							],
+							"variable": [
+								{
+									"key": "evseId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modify External EVSE",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"imgBase64\": \"\",\r\n    \"deviceName\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/evseExt/:evseId",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"evseExt",
+								":evseId"
+							],
+							"variable": [
+								{
+									"key": "evseId",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get manufacturer Data",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/evse/:evseId/manufacturerData",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"evse",
+								":evseId",
+								"manufacturerData"
+							],
+							"variable": [
+								{
+									"key": "evseId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modify EVSE",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"deviceName\": \"newDevice\",\r\n        \"deviceCode\": \"ae6f5ca1-a0c8-4ced-a45f-44260e7f800e\",\r\n        \"serialNumber\": \"86af2317-e741-4ebd-88fe-03e9c3d4bdd8\",\r\n        \"softwareRev\": \"0\",\r\n        \"hardwareRev\": \"0\",\r\n        \"vendor\": {\r\n            \"name\": \"coretech\",\r\n            \"code\": \"60745\"\r\n        },\r\n        \"brandName\": \"coretech\",\r\n        \"manufacturer\": {\r\n            \"label\": \"eSystems\",\r\n            \"description\": \"Charging Station\"\r\n        },\r\n        \"deviceModel\": \"EVSE\",\r\n        \"imgBase64\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/evse/:evseId",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"evse",
+								":evseId"
+							],
+							"variable": [
+								{
+									"key": "evseId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Error Code",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"lastErrorCode\": \"0015\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/evse/:evseId/errorState",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"evse",
+								":evseId",
+								"errorState"
+							],
+							"variable": [
+								{
+									"key": "evseId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Error Code",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/evse/:evseId/errorState",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"evse",
+								":evseId",
+								"errorState"
+							],
+							"variable": [
+								{
+									"key": "evseId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Clear Error Code",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/evse/:evseId/errorState",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"evse",
+								":evseId",
+								"errorState"
+							],
+							"variable": [
+								{
+									"key": "evseId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload Image",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"imgBase64\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/evse/:evseId/image",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"evse",
+								":evseId",
+								"image"
+							],
+							"variable": [
+								{
+									"key": "evseId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Image",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/evse/:evseId/image",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"evse",
+								":evseId",
+								"image"
+							],
+							"variable": [
+								{
+									"key": "evseId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Image",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/evse/:evseId/image",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"evse",
+								":evseId",
+								"image"
+							],
+							"variable": [
+								{
+									"key": "evseId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete EVSE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/evse/:evseId",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"evse",
+								":evseId"
+							],
+							"variable": [
+								{
+									"key": "evseId",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List EVSE",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/evse/list",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"evse",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Run EVSE with CEM",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"remoteSki\": \"23ef43d7a6487fb9a44c7fbb0d2b840514b8faa6\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/evse/:evseId/cem",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"evse",
+								":evseId",
+								"cem"
+							],
+							"variable": [
+								{
+									"key": "evseId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CEM",
+			"item": [
+				{
+					"name": "Add CEM",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vendorCode\": \"60745\",\r\n    \"deviceBrand\": \"eSystems\",\r\n    \"deviceModel\": \"eSystems\",\r\n    \"serialNumber\": \"00000001\",\r\n    \"port\": 4712\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/add",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add External CEM",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"remoteSKI\" : \"1a441fcd16bb822006ef8cb91d4a98aee27597da\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/addExt",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"addExt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get CEM",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/cem",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modify external CEM",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"imgBase64\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/cemExt",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cemExt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get External CEM",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/cemExt",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cemExt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get external Devices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/extDevices",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"extDevices"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "test",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/v1/cem/extDevices",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"cem",
+										"extDevices"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 Aug 2024 13:33:04 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "193"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"type\": \"EVSE\",\n        \"isExternal\": true,\n        \"address\": {\n            \"device\": \"d:_i:60745_Katek-00000864\",\n            \"entity\": [\n                1\n            ]\n        }\n    },\n    {\n        \"type\": \"EV\",\n        \"isExternal\": true,\n        \"address\": {\n            \"device\": \"d:_i:60745_Katek-00000864\",\n            \"entity\": [\n                1,\n                1\n            ]\n        }\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get external Devices Data",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"entityAddressType\": {\r\n            \"device\": \"d:_i:60745_Katek-00000864\",\r\n            \"entity\": [\r\n                1,\r\n                1\r\n            ]        \r\n    },\r\n    \"reqData\": \"evseManufacturerData\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/extDevices/data",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"extDevices",
+								"data"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete CEM",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/cem",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete external CEM",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/cemExt",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cemExt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FuseCurrentLimit",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fuseLimit\": 40.0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/config/FuseCurrentLimit",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"config",
+								"FuseCurrentLimit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Device",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"remoteSki\": \"eeebe828c00f8179731d46718cf66256915e7ed0\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/trust",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"trust"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Device",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"remoteSki\": \"41c98b1bbe5fc7657ce311981951f12d304ab419\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/trust",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"trust"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Algorithm",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"algorithm\": \"fairshare\",\r\n    \"distributionTime\": 30\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/algorithm",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"algorithm"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Algorithm",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/algorithm",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"algorithm"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload Image",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "file",
+							"file": {
+								"src": ""
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/image",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"image"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Image",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/image",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"image"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Image",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/image",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"image"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Heartbeat",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"action\": \"stop\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/heartbeat",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"heartbeat"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Heartbeat State",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/heartbeat",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"heartbeat"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Error State",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"lastErrorCode\": \"0015\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/errorState",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"errorState"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Clear Error State",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/errorState",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"errorState"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Error State",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/errorState",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"errorState"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Uncontrollable Device",
+			"item": [
+				{
+					"name": "Add Single Phase UncontrollableDevice",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"deviceName\": \"Fan\",\r\n    \"current\": {\r\n        \"a\": 40.0\r\n    },\r\n    \"powerFactor\": 1.0,\r\n    \"powerStateOn\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/uncontrollabledevice",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"uncontrollabledevice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Three Phase UncontrollableDevice",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"deviceName\": \"appliances\",\r\n    \"current\": {\r\n        \"a\": 36.0,\r\n        \"b\": 36.0,\r\n        \"c\": 36.0\r\n    },\r\n    \"powerFactor\": 1.0,\r\n    \"powerStateOn\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/uncontrollabledevice",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"uncontrollabledevice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Three Phase UncontrollableDevice",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/uncontrollabledevice/:deviceId",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"uncontrollabledevice",
+								":deviceId"
+							],
+							"variable": [
+								{
+									"key": "deviceId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modify UncontrollableDevice",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/uncontrollabledevice/:deviceId",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"uncontrollabledevice",
+								":deviceId"
+							],
+							"variable": [
+								{
+									"key": "deviceId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload Image",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "file",
+							"file": {}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/uncontrollabledevice/:deviceId/image",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"uncontrollabledevice",
+								":deviceId",
+								"image"
+							],
+							"variable": [
+								{
+									"key": "deviceId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Image",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/uncontrollabledevice/:deviceId/image",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"uncontrollabledevice",
+								":deviceId",
+								"image"
+							],
+							"variable": [
+								{
+									"key": "deviceId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Image",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/uncontrollabledevice/:deviceId/image",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"uncontrollabledevice",
+								":deviceId",
+								"image"
+							],
+							"variable": [
+								{
+									"key": "deviceId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List UncontrollableDevice",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/uncontrollabledevice",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"uncontrollabledevice"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "EnergyMeter",
+			"item": [
+				{
+					"name": "Get EnergyMeter readings",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/energymeter",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"energymeter"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

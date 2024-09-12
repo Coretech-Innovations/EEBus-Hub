@@ -1,0 +1,146 @@
+[
+    {
+        "actionId": 1,
+        "actionType": "destroy",
+        "entityIdRef": 0,
+        "entityType": "CEM",
+        "config": {
+            "evsePatchConfig": null,
+            "cemConfig": {
+                "DeviceName": "Coretech CEM",
+                "vendorCode": "60740",
+                "deviceBrand": "Coretech Innovations",
+                "deviceModel": "EEBUS-Hub",
+                "serialNumber": "00000001",
+                "ImgBase64": ""
+            },
+            "cemPatchConfig": null,
+            "uncontrollablePatchConfig": null,
+            "realEVSEConfig": null,
+            "realCEMConfig": null
+        }
+    },
+    {
+        "actionId": 2,
+        "actionType": "create",
+        "entityIdRef": 0,
+        "entityType": "Real CEM",
+        "config": {
+            "evsePatchConfig": null,
+            "cemPatchConfig": null,
+            "uncontrollablePatchConfig": null,
+            "realEVSEConfig": null,
+            "realCEMConfig": {
+                "RemoteSki": "b9418c9ffb769f1a0b017a64f3b1f8a5c7c6341c",
+                "ImgBase64": ""
+            }
+        }
+    },
+    {
+        "actionId": 3,
+        "actionType": "create",
+        "entityIdRef": 0,
+        "entityType": "EVSE",
+        "config": {
+            "evseConfig": {
+                "deviceName": "Coretech EVSE WLBX",
+                "deviceCode": "e91a53c3",
+                "serialNumber": "4daba52b",
+                "softwareRev": "0",
+                "hardwareRev": "0",
+                "vendor": {
+                    "name": "Coretech",
+                    "code": "60745"
+                },
+                "brandName": "Coretech",
+                "manufacturer": {
+                    "label": "Coretech",
+                    "description": "Charging Station"
+                },
+                "deviceModel": "Ghostone",
+                "imgBase64": "",
+                "Ski": ""
+            },
+            "evsePatchConfig": null,
+            "cemPatchConfig": null,
+            "uncontrollablePatchConfig": null,
+            "realEVSEConfig": null,
+            "realCEMConfig": null
+        }
+    },
+    {
+        "actionId": 4,
+        "actionType": "create",
+        "entityIdRef": 1,
+        "entityType": "EV",
+        "config": {
+            "evConfig": {
+                "communicationStandard": "iso15118-2ed1",
+                "asymmetricCharging": false,
+                "identification": {
+                    "type": "eui64",
+                    "value": "9b967b3d"
+                },
+                "device": {
+                    "name": "Taycan",
+                    "code": "14e3a729",
+                    "serialNumber": "a3891083",
+                    "softwareRev": "v1.0",
+                    "hardwareRev": "v1.0",
+                    "vendor": {
+                        "name": "Porshe",
+                        "code": "0011"
+                    },
+                    "brandName": "Porshe",
+                    "manufacturer": {
+                        "label": "D214QL1",
+                        "description": "EV Car"
+                    },
+                    "powerLimitsRange": {
+                        "min": 0,
+                        "max": 0,
+                        "scale": 0
+                    },
+                    "powerLimitsValue": {
+                        "min": 0,
+                        "max": 0,
+                        "scale": 0
+                    },
+                    "operatingState": "normalOperation"
+                },
+                "currentLimits": {
+                    "min": 6,
+                    "max": 10
+                },
+                "imgBase64": "",
+                "chargingEnable": true,
+                "dischargingEnable": false,
+                "chargingCapacity": 100,
+                "charged": 0,
+                "batteryHealth": 100
+            },
+            "evsePatchConfig": null,
+            "cemPatchConfig": null,
+            "uncontrollablePatchConfig": null,
+            "realEVSEConfig": null,
+            "realCEMConfig": null
+        }
+    },
+    {
+        "actionId": 5,
+        "actionType": "config",
+        "entityIdRef": 1,
+        "entityType": "EV",
+        "config": {
+            "evConfigConfig": {
+                "ConfigType": "connectToEVSE",
+                "RemoteEntityIdRef": 0
+            },
+            "evsePatchConfig": null,
+            "cemPatchConfig": null,
+            "uncontrollablePatchConfig": null,
+            "realEVSEConfig": null,
+            "realCEMConfig": null
+        }
+    }
+]
