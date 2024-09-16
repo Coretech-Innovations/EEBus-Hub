@@ -30,7 +30,7 @@ Also, for further info or support, you can contact us at: eebus.hub@coretech-inn
 |                                                       | Scenario 2 | - | - |
 |                                                       | Scenario 3 | - | - |
 |                                                       |            |               |               |
-| overload Protection by EV current curtailment (OPEV)  | Scenario 1 | ✅     | ✅     |
+| Overload Protection by EV current curtailment (OPEV)  | Scenario 1 | ✅     | ✅     |
 |                                                       | Scenario 2 | ✅     | ✅     |
 |                                                       | Scenario 3 | ✅     | ✅     | 
 |                                                       |            |               |               |
