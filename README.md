@@ -1,5 +1,5 @@
 
-# EEBus-Hub-Scnearios
+# EEBus-Hub
 
 
 [EEBUS](https://eebus.org) framework to test integrating your device over an EEBUS network. It uses the [eebus-go](https://github.com/enbility/eebus-go) library for EEBUS interactions.
