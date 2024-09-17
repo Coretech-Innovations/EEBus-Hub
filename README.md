@@ -2,7 +2,7 @@
 # EEBus-Hub
 
 
-[EEBUS](https://eebus.org) framework to test integrating your device over an EEBUS network. It uses the [eebus-go](https://github.com/enbility/eebus-go) library for EEBUS interactions.
+[EEBUS](https://eebus.org) framework to test integrating your device over an EEBUS network. It uses the versatile open-source stack [eebus-go](https://github.com/enbility/eebus-go) for EEBUS interactions and implementing different actors and use cases.
 
 The EEBus-Hub provides APIs to control different actors participating that may interact in an EEBUS environment e.g. EV, EVSE, HEMS, Energy Guard, SMGW,...
 The simulation allows plugging in real devices besides the numerous simulated devices to ease the testing of an EEBUS device.
