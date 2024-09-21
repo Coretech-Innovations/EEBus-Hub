@@ -7,7 +7,7 @@
 The EEBus-Hub provides APIs to control different actors participating that may interact in an EEBUS environment e.g. EV, EVSE, HEMS, Energy Guard, SMGW,...
 The simulation allows plugging in real devices besides the numerous simulated devices to ease the testing of an EEBUS device.
 
-You can [download](https://www.coretech-innovations.com/projects/eebushub/download) the tool for free under the GPL2 license.
+You can [download](https://www.coretech-innovations.com/projects/eebushub/download) the tool for free under the MIT license.
 
 Also, for further info or support, you can contact us at: eebus.hub@coretech-innovations.com
 
