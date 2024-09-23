@@ -54,7 +54,8 @@ Also, for further info or support, you can contact us at: eebus.hub@coretech-inn
 ## Clone the project
 
 ```bash
-$ git clone https://github.com/Coretech-Innovations/EEBUS-Hub-Scenarios
+$ git clone https://github.com/Coretech-Innovations/EEBus-Hub.git
+
 ```
 
 ## How to Use
