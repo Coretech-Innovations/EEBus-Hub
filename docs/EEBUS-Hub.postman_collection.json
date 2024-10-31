@@ -160,6 +160,72 @@
 					"response": []
 				},
 				{
+					"name": "Start Logging",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/sim/log/start",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"sim",
+								"log",
+								"start"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Stop Logging",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/sim/log/stop",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"sim",
+								"log",
+								"stop"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Clear Logging",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/sim/log/clear",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"sim",
+								"log",
+								"clear"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get Simulation status",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -1068,7 +1134,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"deviceName\": \"eSystems EVSE WallBox\",\r\n    \"deviceCode\": \"0002\",\r\n    \"vendor\":{\r\n        \"name\": \"eSystems\",\r\n        \"code\": \"60745\"\r\n    },\r\n    \"softwareRev\": \"0\",\r\n    \"hardwareRev\": \"0\",\r\n    \"brandName\": \"eSystems\",\r\n    \"Manufacturer\":{\r\n        \"label\": \"eSystems\",\r\n        \"description\": \"Charging Station\"\r\n    },\r\n    \"deviceModel\": \"EVSE\",\r\n    \"serialNumber\": \"00000003\",\r\n    \"imgBase64\": \"\"\r\n}",
+							"raw": "{\r\n    \"deviceName\": \"Coretech EVSE WallBox\",\r\n    \"deviceCode\": \"0002\",\r\n    \"vendor\":{\r\n        \"name\": \"Coretech\",\r\n        \"code\": \"60745\"\r\n    },\r\n    \"softwareRev\": \"0\",\r\n    \"hardwareRev\": \"0\",\r\n    \"brandName\": \"Coretech\",\r\n    \"Manufacturer\":{\r\n        \"label\": \"Coretech\",\r\n        \"description\": \"Charging Station\"\r\n    },\r\n    \"deviceModel\": \"EVSE\",\r\n    \"serialNumber\": \"00000003\",\r\n    \"imgBase64\": \"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1098,7 +1164,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"deviceName\": \"eSystems EVSE WallBox\",\r\n    \"remoteSki\": \"29b65c2cb67cda6343a40391d35d851c6872aed5\"\r\n}",
+							"raw": "{\r\n    \"deviceName\": \"Coretech EVSE WallBox\",\r\n    \"remoteSki\": \"29b65c2cb67cda6343a40391d35d851c6872aed5\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1239,7 +1305,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"deviceName\": \"newDevice\",\r\n        \"deviceCode\": \"ae6f5ca1-a0c8-4ced-a45f-44260e7f800e\",\r\n        \"serialNumber\": \"86af2317-e741-4ebd-88fe-03e9c3d4bdd8\",\r\n        \"softwareRev\": \"0\",\r\n        \"hardwareRev\": \"0\",\r\n        \"vendor\": {\r\n            \"name\": \"coretech\",\r\n            \"code\": \"60745\"\r\n        },\r\n        \"brandName\": \"coretech\",\r\n        \"manufacturer\": {\r\n            \"label\": \"eSystems\",\r\n            \"description\": \"Charging Station\"\r\n        },\r\n        \"deviceModel\": \"EVSE\",\r\n        \"imgBase64\": \"\"\r\n}",
+							"raw": "{\r\n    \"deviceName\": \"newDevice\",\r\n        \"deviceCode\": \"ae6f5ca1-a0c8-4ced-a45f-44260e7f800e\",\r\n        \"serialNumber\": \"86af2317-e741-4ebd-88fe-03e9c3d4bdd8\",\r\n        \"softwareRev\": \"0\",\r\n        \"hardwareRev\": \"0\",\r\n        \"vendor\": {\r\n            \"name\": \"coretech\",\r\n            \"code\": \"60745\"\r\n        },\r\n        \"brandName\": \"coretech\",\r\n        \"manufacturer\": {\r\n            \"label\": \"Coretech\",\r\n            \"description\": \"Charging Station\"\r\n        },\r\n        \"deviceModel\": \"EVSE\",\r\n        \"imgBase64\": \"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1559,6 +1625,174 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get EVSE State",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/evse/:evseId/state",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"evse",
+								":evseId",
+								"state"
+							],
+							"variable": [
+								{
+									"key": "evseId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get EVSE Power Limit",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/evse/:evseId/powerLimit",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"evse",
+								":evseId",
+								"powerLimit"
+							],
+							"variable": [
+								{
+									"key": "evseId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get EVSE Active Power Limit",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/evse/:evseId/activePowerLimit",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"evse",
+								":evseId",
+								"activePowerLimit"
+							],
+							"variable": [
+								{
+									"key": "evseId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Last Sent Heartbeat",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/evse/:evseId/lastSentHeartbeat",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"evse",
+								":evseId",
+								"lastSentHeartbeat"
+							],
+							"variable": [
+								{
+									"key": "evseId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Last Received Heartbeat",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/evse/:evseId/lastReceivedHeartbeat",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"evse",
+								":evseId",
+								"lastReceivedHeartbeat"
+							],
+							"variable": [
+								{
+									"key": "evseId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET EVSE Power Constraints",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/evse/:evseId/constraints",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"evse",
+								":evseId",
+								"constraints"
+							],
+							"variable": [
+								{
+									"key": "evseId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -1572,7 +1806,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"vendorCode\": \"60745\",\r\n    \"deviceBrand\": \"eSystems\",\r\n    \"deviceModel\": \"eSystems\",\r\n    \"serialNumber\": \"00000001\",\r\n    \"port\": 4712\r\n}",
+							"raw": "{\r\n    \"vendorCode\": \"60745\",\r\n    \"deviceBrand\": \"Coretech\",\r\n    \"deviceModel\": \"CEM\",\r\n    \"serialNumber\": \"00000001\",\r\n    \"port\": 4712\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1590,6 +1824,35 @@
 								"v1",
 								"cem",
 								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update CEM",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"algorithm\": \"firstcomefirstserve\",\r\n    \"quantaTime\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/cem",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem"
 							]
 						}
 					},
@@ -1924,7 +2187,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"algorithm\": \"fairshare\",\r\n    \"distributionTime\": 30\r\n}",
+							"raw": "{\r\n    \"algorithm\": \"roundrobin\",\r\n    \"distributionTime\": 30\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
