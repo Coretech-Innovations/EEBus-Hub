@@ -9,7 +9,7 @@ This folder contains different examples to see the Overload Protection by EV Cha
 
 ## Supported Scenarios
 
-All three scenarios represented in the EEBus documentaion are supported:
+All three scenarios represented in the EEBus documentation are supported:
 - Energy Guard curtails charging current of EV
 - EV checks Energy Guard availability
 - Energy Guard sends error state

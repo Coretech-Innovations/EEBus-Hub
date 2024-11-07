@@ -1,0 +1,3 @@
+[submodule "devices/eebus-go"]
+	path = devices/eebus-go
+	url = https://github.com/enbility/eebus-go.git
