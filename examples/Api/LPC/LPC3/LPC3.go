@@ -5,7 +5,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
+	"os"
 	"os/exec"
 	"runtime"
 	"time"
@@ -24,12 +26,10 @@ func main() {
 		"speedFactor": 1,
 	})
 	if err != nil {
-		fmt.Println(err.Error())
-		return
+		log.Fatal(err.Error())
 	}
 	if SimResetResp.Status != "OK" {
-		fmt.Println(SimResetResp.Err)
-		return
+		log.Fatal(SimResetResp.Err)
 	}
 	time.Sleep(2 * time.Second)
 	// getting CEM Ski
@@ -37,12 +37,10 @@ func main() {
 		Ski string `json:"ski"`
 	}]("GET", "/cem", nil)
 	if err != nil {
-		fmt.Println(err.Error())
-		return
+		log.Fatal(err.Error())
 	}
 	if len(cemSkiResp.Ski) == 0 {
-		fmt.Println("no CEM in the system")
-		return
+		log.Fatal("no CEM in the system")
 	}
 	cemSKI := cemSkiResp.Ski
 	fmt.Printf("the CEM Ski is %s\n", cemSKI)
@@ -58,12 +56,10 @@ func main() {
 		"deviceName": "Demo EVSE",
 	})
 	if err != nil {
-		fmt.Println(err.Error())
-		return
+		log.Fatal(err.Error())
 	}
 	if addEvseResp.Status != "OK" {
-		fmt.Println(addEvseResp.Error)
-		return
+		log.Fatal(addEvseResp.Error)
 	}
 	// step no 2: start the simulation
 	simStartResp, err := sendRequest[struct {
@@ -74,12 +70,10 @@ func main() {
 		"speedFactor": 1,
 	})
 	if err != nil {
-		fmt.Println(err.Error())
-		return
+		log.Fatal(err.Error())
 	}
 	if simStartResp.Status != "OK" {
-		fmt.Println(simStartResp.Err)
-		return
+		log.Fatal(simStartResp.Err)
 	}
 	// step no 3: trust the EVSE from CEM side
 	cemTrustResp, err := sendRequest[struct {
@@ -89,30 +83,28 @@ func main() {
 		"remoteSKI": evseSKI,
 	})
 	if err != nil {
-		fmt.Println(err.Error())
-		return
+		log.Fatal(err.Error())
 	}
 	if cemTrustResp.Status != "OK" {
-		fmt.Println(cemTrustResp.Err)
+		log.Fatal(cemTrustResp.Err)
 	}
-	os := runtime.GOOS
-	switch os {
+	OS := runtime.GOOS
+	var cmd *exec.Cmd
+	switch OS {
 	case "windows":
 		// init the submodule
-		cmd := exec.Command("cmd", "/C", "git submodule init")
+		cmd = exec.Command("cmd", "/C", "git submodule init")
 		cmd.Dir = "./devices/eebus-go/"
 		_, err = cmd.Output()
 		if err != nil {
-			fmt.Println(err.Error())
-			return
+			log.Fatal(err.Error())
 		}
 		// update the submodule
 		cmd = exec.Command("cmd", "/C", "git submodule update")
 		cmd.Dir = "./devices/eebus-go/"
 		_, err = cmd.Output()
 		if err != nil {
-			fmt.Println(err.Error())
-			return
+			log.Fatal(err.Error())
 		}
 		// running the External EVSE
 		commandStr := fmt.Sprintf("go run examples/evse/main.go 4711 %s ./keys/evse.crt ./keys/evse.key", cemSKI)
@@ -134,16 +126,14 @@ func main() {
 		cmd.Dir = "./devices/eebus-go/"
 		_, err = cmd.Output()
 		if err != nil {
-			fmt.Println(err.Error())
-			return
+			log.Fatal(err.Error())
 		}
 		// update the submodule
 		cmd = exec.Command("git submodule update")
 		cmd.Dir = "./devices/eebus-go/"
 		_, err = cmd.Output()
 		if err != nil {
-			fmt.Println(err.Error())
-			return
+			log.Fatal(err.Error())
 		}
 		// running the External EVSE
 		commandStr := fmt.Sprintf("go run examples/evse/main.go 4711 %s ./keys/evse.crt ./keys/evse.key", cemSKI)
@@ -170,8 +160,7 @@ func main() {
 			DeviceSki     string `json:"ski"`
 		}]("GET", "/cem/LpcDevicesData", nil)
 		if err != nil {
-			fmt.Println(err.Error())
-			return
+			log.Fatal(err.Error())
 		}
 		id := -1
 		for idx, dev := range devices {
@@ -204,41 +193,27 @@ func main() {
 		"durationSeconds":      10000,
 	})
 	if err != nil {
-		fmt.Println(err.Error())
-		return
+		err := cmd.Process.Kill()
+		if err != nil {
+			fmt.Println(err.Error())
+		}
+		log.Fatal(err.Error())
 	}
 	if FSValues.Success {
 		fmt.Println("CEM successfully wrote new failsafe values on the EVSE")
 		fmt.Printf("New data: failsafe value: %.2f W, failsafe duration: %.2f sec\n", FSValues.Data.Value, FSValues.Data.DurationSec)
 	} else {
-		fmt.Println("CEM failed to update the failsafe values for the EVSE")
+		err := cmd.Process.Kill()
+		if err != nil {
+			fmt.Println(err.Error())
+		}
+		log.Fatal("CEM failed to update the failsafe values for the EVSE")
 	}
-	// send active power limit command and check the result
-	route = fmt.Sprintf("/cem/ActivePowerConsumptionLimit/%s", deviceAddress)
-	APCL, err := sendRequest[struct {
-		Success bool `json:"success"`
-		Data    struct {
-			Active            bool    `json:"active"`
-			IsLimitChangeable bool    `json:"isLimitChangeable"`
-			Value             float64 `json:"value"`
-			DurationSec       float64 `json:"durationSeconds"`
-		} `json:"data"`
-	}]("POST", route, map[string]any{
-		"active":            true,
-		"isLimitChangeable": true,
-		"value":             9000,
-		"durationSeconds":   300,
-	})
+	err = cmd.Process.Kill()
 	if err != nil {
 		fmt.Println(err.Error())
-		return
 	}
-	if APCL.Success {
-		fmt.Println("CEM successfully wrote new active power limits on the EVSE")
-		fmt.Printf("New data: active power limit: %f W, Active power duration: %f sec\n", APCL.Data.Value, APCL.Data.DurationSec)
-	} else {
-		fmt.Println("CEM failed to update the active power limit values for the EVSE")
-	}
+	os.Exit(0)
 }
 
 func sendRequest[T any](method string, url string, payload any) (T, error) {
