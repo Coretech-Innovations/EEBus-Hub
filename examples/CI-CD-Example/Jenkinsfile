@@ -81,7 +81,7 @@ pipeline {
             {
              script
                 {
-                    dir ("${WORKSPACE}\\EEBus-Hub")
+                    dir ("${WORKSPACE}")
                     {
                         PID = bat(script: "python ProcessID.py .\\eebus-hub-windows-amd64.exe ${PORT}", returnStdout: true).trim()
                         echo "${PID}"
