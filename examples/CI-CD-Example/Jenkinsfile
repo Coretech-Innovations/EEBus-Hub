@@ -50,7 +50,7 @@ pipeline {
                 unstash 'Archived_File.zip'
                 bat  'tar -xf Archived_File.zip'
                 bat 'dir'
-                bat 'MOVE .\examples\CI-CD-Example\unzip_files.bat .'
+                bat 'MOVE examples\CI-CD-Example\unzip_files.bat .'
                 bat  'unzip_files.bat'
                 
                 bat 'dir'
@@ -66,7 +66,7 @@ pipeline {
                 {
                     echo "Clonning Repository"
                     bat 'MOVE .\examples\CI-CD-Example\Run_testcase.py .'
-                    bat 'MOVE  MOVE .\examples\CI-CD-Example\ProcessID.py . '
+                    bat 'MOVE .\examples\CI-CD-Example\ProcessID.py . '
                     bat 'MOVE .\examples\CI-CD-Example\generate_csv_report.py .'
                     bat 'MOVE .\examples\CI-CD-Example\eebus-hub-windows-amd64.exe .'
 
