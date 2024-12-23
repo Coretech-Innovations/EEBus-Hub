@@ -68,8 +68,6 @@ pipeline {
                     bat 'MOVE .\\examples\\CI-CD-Example\\Run_testcase.py .'
                     bat 'MOVE .\\examples\\CI-CD-Example\\ProcessID.py . '
                     bat 'MOVE .\\examples\\CI-CD-Example\\generate_csv_report.py .'
-                    bat 'MOVE .\\examples\\CI-CD-Example\\eebus-hub-windows-amd64.exe .'
-
 
                 }
                 
@@ -102,7 +100,7 @@ pipeline {
  
                 script
                 {
-                     dir ("${WORKSPACE}\\EEBus-Hub")
+                     dir ("${WORKSPACE}")
                     {
                         // Generating CSV Report
                         bat "python generate_csv_report.py"
@@ -116,7 +114,7 @@ pipeline {
     post { 
         always
         {
-            dir ("${WORKSPACE}\\EEBus-Hub")
+            dir ("${WORKSPACE}")
             {
                 archiveArtifacts artifacts: 'test_results.json, test_results.csv, test.log', fingerprint: true
             }
