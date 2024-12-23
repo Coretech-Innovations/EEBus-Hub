@@ -30,7 +30,8 @@ pipeline {
                     {
                           cleanWs()
                           checkout scm
-                          bat 'git submodule update --recursive'
+                          bat 'git submodule init'
+                          bat 'git submodule update'
                     }
                 }                 
 
