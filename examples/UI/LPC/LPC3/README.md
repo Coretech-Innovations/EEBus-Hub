@@ -2,11 +2,11 @@
 
 ## Introduction
 
-This document will help you understand and implement the "Limitation of Power Consumption" use case, detailing the setup and testing process for the EEBus Hub, Customer Energy Manager (CEM), and an external Electric Vehicle Supply Equipment (EVSE).
+This example will help you understand and implement the "Limitation of Power Consumption" use case, detailing the setup and testing process for the EEBus Hub, Customer Energy Manager (CEM), and an external Electric Vehicle Supply Equipment (EVSE).
 
-### Goal of this document
+### Goal of this example
 
-The focus of this document is to demonstrate how to connect the CEM to an external **EVSE** to observe and implement the "Limitation of Power Consumption" use case (scenario 1 and scenario 2). This use case ensures that energy consumption is managed effectively to prevent overloading or excessive power usage.
+The focus of this example is to demonstrate how to connect the CEM to an external **EVSE** to observe and implement the "Limitation of Power Consumption" use case (scenario 1 and scenario 2). This use case ensures that energy consumption is managed effectively to prevent overloading or excessive power usage.
 
 ### Use Case Overview: Limitation of power consumption
 
