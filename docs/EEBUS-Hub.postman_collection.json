@@ -68,7 +68,7 @@
 					"response": []
 				},
 				{
-					"name": "undo",
+					"name": "Undo",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -89,7 +89,7 @@
 					"response": []
 				},
 				{
-					"name": "redo",
+					"name": "Redo",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -110,7 +110,7 @@
 					"response": []
 				},
 				{
-					"name": "save",
+					"name": "Save",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -256,6 +256,304 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Start/Stop logging",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/sim/logs/:action",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"sim",
+								"logs",
+								":action"
+							],
+							"variable": [
+								{
+									"key": "action",
+									"value": "start"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Logging Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/sim/logState",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"sim",
+								"logState"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get EEBus Logs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/sim/logs/eebuslogs",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"sim",
+								"logs",
+								"eebuslogs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Event Logs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/sim/logs/eventlogs",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"sim",
+								"logs",
+								"eventlogs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Usecase Availability",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"lpcEnabled\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/sim/usecases",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"sim",
+								"usecases"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Usecase Availability",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/sim/usecases",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"sim",
+								"usecases"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Speed Factor",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"speedFactor\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/sim/speedfactor",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"sim",
+								"speedfactor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Export",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/sim/export",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"sim",
+								"export"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Import",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/sim/import",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"sim",
+								"import"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Available Devices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/mdns",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"mdns"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Version",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/version",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"version"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request new Download Link",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/newVersion/:email/:name",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"newVersion",
+								":email",
+								":name"
+							],
+							"variable": [
+								{
+									"key": "email",
+									"value": ""
+								},
+								{
+									"key": "name",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -288,6 +586,46 @@
 								"v1",
 								"ev",
 								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get EV",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dischargingEnable\": false,\r\n    \"chargingEnable\": true,\r\n    \"communicationStandard\": \"iso15118-2ed1\",\r\n    \"asymmetricCharging\": false,\r\n    \"identification\": {\r\n        \"type\": \"eui64\",\r\n        \"value\": \"12-34-56-78-9A-BC-DE-F0\"\r\n    },\r\n    \"device\": {\r\n        \"name\": \"Taycan\",\r\n        \"code\": \"0001\",\r\n        \"serialNumber\": \"SN1235\",\r\n        \"softwareRev\": \"v1.0\",\r\n        \"hardwareRev\": \"v1.0\",\r\n        \"vendor\": {\r\n            \"name\": \"Porshe\",\r\n            \"code\": \"0011\"\r\n        },\r\n        \"brandName\": \"Porshe\",\r\n        \"manufacturer\": {\r\n            \"label\": \"D214QL1\",\r\n            \"description\": \"EV Car\"\r\n        },\r\n        \"powerLimitsRange\": {\r\n            \"min\": 0,\r\n            \"max\": 0,\r\n            \"scale\": 0\r\n        },\r\n        \"powerLimitsValue\": {\r\n            \"min\": 0,\r\n            \"max\": 0,\r\n            \"scale\": 0\r\n        },\r\n        \"operatingState\": \"normalOperation\"\r\n    },\r\n    \"currentLimits\": {\r\n        \"min\": 2,\r\n        \"max\": 10\r\n    },\r\n    \"chargingCapacity\": 80,\r\n    \"charged\": 20,\r\n    \"batteryHealth\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/ev/:evId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"ev",
+								":evId"
+							],
+							"variable": [
+								{
+									"key": "evId",
+									"value": "2"
+								}
 							]
 						}
 					},
@@ -1121,6 +1459,28 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get All EVs Information",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/ev/systemState",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"ev",
+								"systemState"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -1465,6 +1825,43 @@
 					"response": []
 				},
 				{
+					"name": "Upload Image Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"checkType\": \"Subscription\",\r\n    \"featureName\": \"deviceClassification\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/evse/:evseId/checkFeature",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"evse",
+								":evseId",
+								"checkFeature"
+							],
+							"variable": [
+								{
+									"key": "evseId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get Image",
 					"request": {
 						"method": "GET",
@@ -1711,6 +2108,34 @@
 					"response": []
 				},
 				{
+					"name": "Get EVSE Failsafe Consumption Limit",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/evse/:evseId/lpcFailsafeValues",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"evse",
+								":evseId",
+								"lpcFailsafeValues"
+							],
+							"variable": [
+								{
+									"key": "evseId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "GET Last Sent Heartbeat",
 					"request": {
 						"method": "GET",
@@ -1772,7 +2197,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/evse/:evseId/constraints",
+							"raw": "localhost:8080/api/v1/evse/:evseId/lpcPowerConstraints",
 							"host": [
 								"localhost"
 							],
@@ -1782,7 +2207,7 @@
 								"v1",
 								"evse",
 								":evseId",
-								"constraints"
+								"lpcPowerConstraints"
 							],
 							"variable": [
 								{
@@ -2025,7 +2450,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"entityAddressType\": {\r\n            \"device\": \"d:_i:60745_Katek-00000864\",\r\n            \"entity\": [\r\n                1,\r\n                1\r\n            ]        \r\n    },\r\n    \"reqData\": \"evseManufacturerData\"\r\n}",
+							"raw": "{\r\n    \"ski\": \"343d1466023e58de8cac120317378a38b6a90b59\",\r\n    \"reqData\": \"evseFailsafeValues\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2422,6 +2847,822 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get Latest Sent Heartbeat",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/latestSentHeartbeat",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"latestSentHeartbeat"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Latest Received Heartbeat",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/latestReceivedHeartbeat/:deviceAddress",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"latestReceivedHeartbeat",
+								":deviceAddress"
+							],
+							"variable": [
+								{
+									"key": "deviceAddress",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Connected Devices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/connectedDevices",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"connectedDevices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Grid Measurement",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/gridmeasurement",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"gridmeasurement"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send APCL to All Connected Devices",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"active\": true,\r\n    \"isLimitChangeable\": true,\r\n    \"value\": 10000,\r\n    \"durationSeconds\": 30\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/ActivePowerConsumptionLimit",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"ActivePowerConsumptionLimit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Device APCL for All Connected Devices",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"active\": true,\r\n    \"isLimitChangeable\": true,\r\n    \"value\": 10000,\r\n    \"durationSeconds\": 30\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/ActivePowerConsumptionLimit",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"ActivePowerConsumptionLimit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send APCL to Device",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"active\": true,\r\n    \"isLimitChangeable\": true,\r\n    \"value\": 10000,\r\n    \"durationSeconds\": 30\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/ActivePowerConsumptionLimit/:deviceAddress",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"ActivePowerConsumptionLimit",
+								":deviceAddress"
+							],
+							"variable": [
+								{
+									"key": "deviceAddress",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update APCL for a Device",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"active\": true,\r\n    \"isLimitChangeable\": true,\r\n    \"value\": 10000,\r\n    \"durationSeconds\": 30\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/ActivePowerConsumptionLimit/:deviceAddress",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"ActivePowerConsumptionLimit",
+								":deviceAddress"
+							],
+							"variable": [
+								{
+									"key": "deviceAddress",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get APCL from All Devices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/ActivePowerConsumptionLimit",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"ActivePowerConsumptionLimit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send FSCAPL to All Devices",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isValueChangeable\": true,\r\n    \"value\": 10000,\r\n    \"isDurationChangeable\": true,\r\n    \"durationSeconds\": 72000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/FailsafeActivePowerLimit",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"FailsafeActivePowerLimit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update FSCAPL for All Devices",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isValueChangeable\": true,\r\n    \"value\": 10000,\r\n    \"isDurationChangeable\": true,\r\n    \"durationSeconds\": 72000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/FailsafeActivePowerLimit",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"FailsafeActivePowerLimit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send FSCAPL to Device",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isValueChangeable\": true,\r\n    \"value\": 10000,\r\n    \"isDurationChangeable\": true,\r\n    \"durationSeconds\": 72000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/FailsafeActivePowerLimit/:deviceAddress",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"FailsafeActivePowerLimit",
+								":deviceAddress"
+							],
+							"variable": [
+								{
+									"key": "deviceAddress",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update FSCAPL for Device",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isValueChangeable\": true,\r\n    \"value\": 10000,\r\n    \"isDurationChangeable\": true,\r\n    \"durationSeconds\": 72000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/FailsafeActivePowerLimit/:deviceAddress",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"FailsafeActivePowerLimit",
+								":deviceAddress"
+							],
+							"variable": [
+								{
+									"key": "deviceAddress",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get FSCAPL from All Devices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/FailsafeActivePowerLimit",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"FailsafeActivePowerLimit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Active Power Limit Constraints",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/ActivePowerLimitConstraints",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"ActivePowerLimitConstraints"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get LPC Data from All Devices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/LpcDevicesData",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"LpcDevicesData"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Active Power Production Limit to All Devices",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"active\": true,\r\n    \"isLimitChangeable\": true,\r\n    \"value\": -2500,\r\n    \"durationSeconds\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/ActivePowerProductionLimit",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"ActivePowerProductionLimit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Active Power Production Limit  for all Devices",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"active\": true,\r\n    \"isLimitChangeable\": true,\r\n    \"value\": -2500,\r\n    \"durationSeconds\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/ActivePowerProductionLimit",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"ActivePowerProductionLimit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Active Power Production Limit  to Device",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"active\": true,\r\n    \"isLimitChangeable\": true,\r\n    \"value\": -2500,\r\n    \"durationSeconds\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/ActivePowerProductionLimit/:deviceAddress",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"ActivePowerProductionLimit",
+								":deviceAddress"
+							],
+							"variable": [
+								{
+									"key": "deviceAddress",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Active Power Production Limit for Device",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"active\": true,\r\n    \"isLimitChangeable\": true,\r\n    \"value\": -2500,\r\n    \"durationSeconds\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/ActivePowerProductionLimit/:deviceAddress",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"ActivePowerProductionLimit",
+								":deviceAddress"
+							],
+							"variable": [
+								{
+									"key": "deviceAddress",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Active Power Production Limit from All Devices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/ActivePowerProductionLimit",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"ActivePowerProductionLimit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Failsafe Active Power Production to all Devices",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isLimitChangeable\": true,\r\n    \"value\": -2500,\r\n    \"isDurationChangeable\": true,\r\n    \"durationSeconds\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/FailsafeActivePowerProductionLimit",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"FailsafeActivePowerProductionLimit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Failsafe Active Power Production for all Devices",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isLimitChangeable\": true,\r\n    \"value\": -2500,\r\n    \"isDurationChangeable\": true,\r\n    \"durationSeconds\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/FailsafeActivePowerProductionLimit",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"FailsafeActivePowerProductionLimit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Failsafe Active Power Production to Device",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isLimitChangeable\": true,\r\n    \"value\": -2500,\r\n    \"isDurationChangeable\": true,\r\n    \"durationSeconds\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/FailsafeActivePowerProductionLimit/:deviceAddress",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"FailsafeActivePowerProductionLimit",
+								":deviceAddress"
+							],
+							"variable": [
+								{
+									"key": "deviceAddress",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Failsafe Active Power Production for Device",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isLimitChangeable\": true,\r\n    \"value\": -2500,\r\n    \"isDurationChangeable\": true,\r\n    \"durationSeconds\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/FailsafeActivePowerProductionLimit/:deviceAddress",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"FailsafeActivePowerProductionLimit",
+								":deviceAddress"
+							],
+							"variable": [
+								{
+									"key": "deviceAddress",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Failsafe Active Power Production from All Devices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/FailsafeActivePowerProductionLimit",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"FailsafeActivePowerProductionLimit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Active Power Production Constraints",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/ActivePowerProductionLimitConstraints",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"ActivePowerProductionLimitConstraints"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get LPP Data from All Devices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/LppDevicesData",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"LppDevicesData"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get MPC Measurement Data",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/cem/MpcMeasurementData",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"cem",
+								"MpcMeasurementData"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -2680,6 +3921,124 @@
 								"api",
 								"v1",
 								"energymeter"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Real Devices",
+			"item": [
+				{
+					"name": "Add Real Device",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"remoteSki\": \"23ef43d7a6487fb9a44c7fbb0d2b840514b8faa6\",\r\n    \"deviceName\": \"Coretech EVSE\",\r\n    \"deviceType\": \"ChargingStation\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/realDevice",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"realDevice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Real Devices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/realDevices",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"realDevices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Real Device",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/realDevice/:deviceType/:deviceId",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"realDevice",
+								":deviceType",
+								":deviceId"
+							],
+							"variable": [
+								{
+									"key": "deviceType",
+									"value": ""
+								},
+								{
+									"key": "deviceId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Real Device",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/realDevice/:deviceType/:deviceId",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"realDevice",
+								":deviceType",
+								":deviceId"
+							],
+							"variable": [
+								{
+									"key": "deviceType",
+									"value": ""
+								},
+								{
+									"key": "deviceId",
+									"value": ""
+								}
 							]
 						}
 					},

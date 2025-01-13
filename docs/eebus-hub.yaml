@@ -273,6 +273,70 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/statusOk"
+  /sim/logs/{action}:
+    post:
+      tags:
+        - SIM
+      summary: Start or Stop Logging at specific time
+      operationId: loggingAction
+      parameters:
+        - name: action
+          in: path
+          schema:
+            type: string
+          required: true
+          example: start
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/statusOk"
+        '400':
+          description: Invalid action entered
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/statusError"
+  /sim/logs/eebuslogs:
+    get:
+      tags:
+        - SIM
+      summary: get the EEBus logs from starting the logging till the stop
+      operationId: getEEBusLogs
+      responses:
+        '200':
+          description: Successful response
+          content:
+            multipart/form-data:
+              schema:
+                type: string
+        '400':
+          description: either no logs created, or the logging is not stopped
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/statusError"
+  /sim/logs/eventlogs:
+    get:
+      tags:
+        - SIM
+      summary: get the event logs from starting the logging till the stop
+      operationId: getEventLogs
+      responses:
+        '200':
+          description: Successful response
+          content:
+            multipart/form-data:
+              schema:
+                type: string
+        '400':
+          description: either no logs created, or the logging is not stopped
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/statusError"
   /ev/add:
     post:
       tags:
