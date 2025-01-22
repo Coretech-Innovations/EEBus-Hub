@@ -12,8 +12,8 @@ tags:
   - name: EVSE
   - name: CEM
   - name: Uncontrollable Device
-  - name: EnergyMeter
-  - name: ServerCodeGen
+  - name: Energy Meter
+  - name: Real Devices
 paths:
   /sim:
     post:
@@ -93,15 +93,15 @@ paths:
     patch:
       tags:
         - SIM
-      summary: Modify speedfactor
-      operationId: modifyspeedfactor
+      summary: Modify speed factor
+      operationId: modifySpeedFactor
       requestBody:
         content:
             application/json:
               schema:
                type: object
                properties:
-                  speedactor:
+                  speedFactor:
                     type: integer
       responses:
         '200':
@@ -337,6 +337,31 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/statusError"
+  /sim/logState:
+    get:
+      tags:
+        - SIM
+      summary: Get the state of the API logging, if the backend in logging the received APIs or not
+      operationId: getAPILoggingState
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APILoggingState"
+  /mdns:
+    get:
+      summary:  get the available mDNS entries in the network
+      operationId: getAvailableMdnsDevices
+      responses:
+        '200':
+          description: successful response
+          content:
+            application/json:
+              schema:
+                title: array of the found entries
+                type: array
   /ev/add:
     post:
       tags:
@@ -399,6 +424,37 @@ paths:
                     $ref: "#/components/schemas/EVConfig"
                   old:
                     $ref: "#/components/schemas/EVConfig"                
+        '400':
+          description: invalid ID number
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/statusError"
+        '404':
+          description: no existing EV with this ID number
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/invalidId"
+    get:
+      tags:
+        - EV
+      summary: get EV
+      operationId: getEV
+      parameters:
+        - name: evId
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: 2
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EVConfig"
         '400':
           description: invalid ID number
           content:
@@ -518,7 +574,7 @@ paths:
               schema: 
                  $ref: "#/components/schemas/statusError"
 
-  /api/v1/ev/{evId}/image:
+  /ev/{evId}/image:
     post:
       tags:
         - EV
@@ -913,111 +969,6 @@ paths:
             application/json:
               schema: 
                 $ref: "#/components/schemas/EVSEStatusOK"
-  /evse/addExt:
-    post:
-      tags:
-        - EVSE
-      summary: Add External EVSE
-      operationId: addExtEVSE
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ExtDeviceConfig"
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json:
-              schema: 
-                $ref: "#/components/schemas/EVSEStatusOK"
-        '400':
-          description: Invalid SKI
-          content:
-            application/json:
-              schema: 
-                 $ref: "#/components/schemas/statusError"
-  /evseExt:
-    get:
-      tags:
-        - EVSE
-      summary: Get External EVSE
-      operationId: getExtEVSE
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json:
-              schema: 
-                $ref: "#/components/schemas/ExtEVSEConfigResponse" 
-  /evseExt/{evseId}:
-    delete:
-      tags:
-        - EVSE
-      summary: Delete External EVSE
-      operationId: deleteExtEVSE
-      parameters:
-        - name: evseId
-          in: path
-          schema:
-            type: integer
-            example: 1
-          required: true
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json:
-              schema: 
-                $ref: "#/components/schemas/statusOk"
-        '400':
-          description: invalid ID number
-          content:
-            application/json:
-              schema: 
-                 $ref: "#/components/schemas/statusError"
-        '404':
-          description: no existing external EVSE with this ID number
-          content:
-            application/json:
-              schema: 
-                 $ref: "#/components/schemas/statusError"         
-    patch:
-      tags:
-        - EVSE
-      summary: Modify External EVSE
-      operationId: modifyExtEVSE
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ExtDeviceConfig"
-      parameters:
-        - name: evseId
-          in: path
-          schema:
-            type: integer
-          required: true
-          example: 1
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json:
-              schema: 
-                $ref: "#/components/schemas/statusOk"
-        '400':
-          description: invalid ID number
-          content:
-            application/json:
-              schema: 
-                 $ref: "#/components/schemas/statusError"
-        '404':
-          description: no existing external EVSE with this ID number
-          content:
-            application/json:
-              schema: 
-                 $ref: "#/components/schemas/statusError"
   /evse/{evseId}/manufacturerData:
     get:
       tags:
@@ -1465,6 +1416,190 @@ paths:
             application/json:
               schema: 
                  $ref: "#/components/schemas/statusError"
+  /evse/{evseId}/lpcActivePowerLimit:
+    get:
+      tags:
+        - EVSE
+      summary: Get the active power consumption limit applied to the EVSE
+      operationId: getLPCActivePowerConsumptionLimit
+      parameters:
+        - name: evseId
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/lpcAPCL"
+        '400':
+          description: invalid ID number
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+        '404':
+          description: no existing EVSE with this ID number
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+        '500':
+          description: LPC use case not supported
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+  /evse/{evseId}/lpcFailsafeValues:
+    get:
+      tags:
+        - EVSE
+      summary: get the failsafe consumption limit value and duration
+      operationId: getFailsafeConsumptionLimit
+      parameters:
+        - name: evseId
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FCAPL"
+        '400':
+          description: invalid ID number
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+        '404':
+          description: no existing EVSE with this ID number
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+  /evse/{evseId}/latestSentHeartbeat:
+    get:
+      tags:
+        - EVSE
+      summary: get the latest sent heartbeat
+      operationId: getLatestSentHeartbeat
+      parameters:
+        - name: evseId
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HeartbeatData"
+        '400':
+          description: invalid ID number
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+        '404':
+          description: no existing EVSE with this ID number
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+        '500':
+          description: LPC use case not supported
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+  /evse/{evseId}/latestReceivedHeartbeat:
+    get:
+      tags:
+        - EVSE
+      summary: get the information of the latest received heartbeat
+      operationId: getLatestReceivedHeartbeat
+      parameters:
+        - name: evseId
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HeartbeatData"
+        '400':
+          description: invalid ID number
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+        '404':
+          description: no existing EVSE with this ID number
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+        '500':
+          description: LPC use case not supported
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+  /evse/{evseId}/lpcPowerConstraints:
+    get:
+      tags:
+        - EVSE
+      summary: get the EVSE LPC Power constraints
+      operationId: getLPCPowerConstraints
+      parameters:
+        - name: evseId
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EVSEPowerConstraints"
+        '400':
+          description: invalid ID number
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+        '404':
+          description: no existing EVSE with this ID number
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+        '500':
+          description: LPC use case not supported
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
   /cem/add:
     post:
       tags:
@@ -1489,24 +1624,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/statusError"
-  /cem/addExt:
-    post:
-      tags:
-        - CEM
-      summary: Add External CEM
-      operationId: addExtCEM
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ExtDeviceConfig"
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json:
-              schema: 
-                $ref: "#/components/schemas/statusOk"
   /cem:
     get:
       tags:
@@ -1560,60 +1677,6 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/statusError"
-  /cemExt:
-    patch:
-      tags:
-        - CEM
-      summary: Modify external CEM
-      operationId: modifyExtCEM
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ExtDeviceConfig"
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json:
-              schema: 
-                 $ref: "#/components/schemas/statusOk"
-        '404':
-          description: no external cem found
-          content:
-            application/json:
-              schema: 
-                 $ref: "#/components/schemas/statusError"
-    get:
-      tags:
-        - CEM
-      summary: Get External CEM
-      operationId: getExtCEM
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json:
-              schema: 
-                $ref: "#/components/schemas/ExtDeviceConfig"
-    delete:
-      tags:
-        - CEM
-      summary: Delete external CEM
-      operationId: deleteExtCEM
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json:
-              schema: 
-                $ref: "#/components/schemas/statusOk"
-        '404':
-          description: no external cem found
-          content:
-            application/json:
-              schema: 
                 $ref: "#/components/schemas/statusError"
   /cem/extDevices:
     get:
@@ -2005,6 +2068,879 @@ paths:
                  $ref: "#/components/schemas/statusError"
         '500':
           description: failed to get error state
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+  /cem/ActivePowerConsumptionLimit:
+    post:
+      tags:
+        - CEM
+      summary: Send APCL to all connected Devices
+      operationId: sendAPCLToAllDevices
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/lpcAPCL"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    $ref: "#/components/schemas/lpcAPCL"
+                  success:
+                    type: boolean
+        '404':
+          description: no cem found
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+        '400':
+          description: there is Data  missing in the body
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+    patch:
+      tags:
+        - CEM
+      summary: patch LPC command
+      operationId: modifyAPCL
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/lpcAPCL"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    $ref: "#/components/schemas/lpcAPCL"
+                  success:
+                    type: boolean
+        '404':
+          description: no cem found
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+    get:
+      tags:
+        - CEM
+      summary: get APCL data from all Devices
+      operationId: getAPCLData
+      responses:
+        '200': 
+          description: successful response
+          content:
+            application/json:
+              schema:
+                type: array
+        '404':
+          description: no cem found
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+  /cem/ActivePowerConsumptionLimit/{deviceAddress}:
+    post:
+      tags:
+        - CEM
+      summary: Send APCL to specific device
+      operationId: sendAPCLToDevice
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/lpcAPCL"
+      parameters:
+        - name: deviceAddress
+          in: path
+          schema:
+            type: string
+          required: true
+          example: d:_n:SIM60745_Wallbox-9166afa5
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    $ref: "#/components/schemas/lpcAPCL"
+                  success:
+                    type: boolean
+        '404':
+          description: no cem found
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+        '400':
+          description: there is Data  missing in the body
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+    patch:
+      tags:
+        - CEM
+      summary: patch APCL to specific device
+      operationId: modifyAPCLToDevice
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/lpcAPCL"
+      parameters:
+        - name: deviceAddress
+          in: path
+          schema:
+            type: string
+          required: true
+          example: d:_n:SIM60745_Wallbox-9166afa5
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    $ref: "#/components/schemas/lpcAPCL"
+                  success:
+                    type: boolean
+        '404':
+          description: no cem found
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+  /cem/FailsafeActivePowerLimit:
+    post:
+      tags:
+        - CEM
+      summary: send FailSafe consumption Power Limit to all Devices
+      operationId: sendFCAPL
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FCAPL"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    $ref: "#/components/schemas/FCAPL"
+                  success:
+                    type: boolean
+        '404':
+          description: no cem found
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+        '400':
+          description: there is Data  missing in the body
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+    patch:
+      tags:
+        - CEM
+      summary: patch FCAPL to all Devices
+      operationId: modifyFCAPL
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FCAPL"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    $ref: "#/components/schemas/FCAPL"
+                  success:
+                    type: boolean
+        '404':
+          description: no cem found
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+    get:
+      tags:
+        - CEM
+      summary: get all FCAPL data from connected device
+      operationId: getFCAPL
+      responses:
+        '200': 
+          description: successful response
+          content:
+            application/json:
+              schema:
+                type: array
+        '404':
+          description: no cem found
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+  /cem/FailsafeActivePowerLimit/{deviceAddress}:
+    post:
+      tags:
+        - CEM
+      summary: send FCAPL to specific device
+      operationId: sendFCAPLToDevice
+      parameters:
+        - name: deviceAddress
+          in: path
+          schema:
+            type: string
+          required: true
+          example: d:_n:SIM60745_Wallbox-9166afa5
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FCAPL"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    $ref: "#/components/schemas/FCAPL"
+                  success:
+                    type: boolean
+        '404':
+          description: no cem found
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+        '400':
+          description: there is Data  missing in the body
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+    patch:
+      tags:
+        - CEM
+      summary: patch FCAPL to specific device
+      operationId: modifyFCAPLToDevice
+      parameters:
+        - name: deviceAddress
+          in: path
+          schema:
+            type: string
+          required: true
+          example: d:_n:SIM60745_Wallbox-9166afa5
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FCAPL"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    $ref: "#/components/schemas/FCAPL"
+                  success:
+                    type: boolean
+        '404':
+          description: no cem found
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+  /cem/ActivePowerLimitConstraints:
+    get:
+      tags:
+        - CEM
+      summary: get LPC power constraints from all Devices
+      operationId: getLPCPowerConstraints
+      responses:
+        '200':
+          description: successful response
+          content:
+            application/json:
+              schema:
+                type: array
+        '404':
+          description: no cem found
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+  /cem/ActivePowerProductionLimit:
+    post:
+      tags:
+        - CEM
+      summary: send Active Power Production Limit to all Devices
+      operationId: sendAPPL
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/lppAPPL"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    $ref: "#/components/schemas/lppAPPL"
+                  success:
+                    type: boolean
+        '404':
+          description: no cem found
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+        '400':
+          description: there is Data  missing in the body
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+    patch:
+      tags:
+        - CEM
+      summary: patch APPL to all Devices
+      operationId: modifyAPPL
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/lppAPPL"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    $ref: "#/components/schemas/lppAPPL"
+                  success:
+                    type: boolean
+        '404':
+          description: no cem found
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+    get:
+      tags:
+        - CEM
+      summary: get all APPL data from all Devices
+      operationId: getAPPL
+      responses:
+        '200':
+          description: successful response
+          content:
+            application/json:
+              schema:
+                type: array
+        '404':
+          description: no cem found
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+  /cem/ActivePowerProductionLimit/{deviceAddress}:
+    post:
+      tags:
+        - CEM
+      summary: send APPL to a specific device
+      operationId: sendAPPLToDevice
+      parameters:
+        - name: deviceAddress
+          in: path
+          schema:
+            type: string
+          required: true
+          example: d:_n:SIM60745_Wallbox-9166afa5
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/lppAPPL"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    $ref: "#/components/schemas/lppAPPL"
+                  success:
+                    type: boolean
+        '404':
+          description: no cem found
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+        '400':
+          description: there is Data  missing in the body
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+    patch:
+      tags:
+        - CEM
+      summary: patch APPL to a specific device
+      operationId: modifyAPPLToDevice
+      parameters:
+        - name: deviceAddress
+          in: path
+          schema:
+            type: string
+          required: true
+          example: d:_n:SIM60745_Wallbox-9166afa5
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/lppAPPL"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    $ref: "#/components/schemas/lppAPPL"
+                  success:
+                    type: boolean
+        '404':
+          description: no cem found
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+  /cem/FailsafeActivePowerProductionLimit:
+    post:
+      tags:
+        - CEM
+      summary: send Failsafe Active Power Production Limit to all devices
+      operationId: sendFSAPPL
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/lppFSAPPL"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    $ref: "#/components/schemas/lppFSAPPL"
+                  success:
+                    type: boolean
+        '404':
+          description: no cem found
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+        '400':
+          description: there is Data  missing in the body
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+    patch:
+      tags:
+        - CEM
+      summary: patch Failsafe Active Power Production Limit to all devices
+      operationId: modifyFSAPPL
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/lppFSAPPL"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    $ref: "#/components/schemas/lppFSAPPL"
+                  success:
+                    type: boolean
+        '404':
+          description: no cem found
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+    get:
+      tags:
+        - CEM
+      summary: get Failsafe Active Power Production Limit from all devices
+      operationId: getFSAPPL
+      responses:
+        '200':
+          description: successful response
+          content:
+            application/json:
+              schema:
+                type: array
+        '404':
+          description: no cem found
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+  /cem/FailsafeActivePowerProductionLimit/{deviceAddress}:
+    post:
+      tags:
+        - CEM
+      summary: send Failsafe Active Power Production Limit to a specific device
+      operationId: sendFSAPPLToDevice
+      parameters:
+        - name: deviceAddress
+          in: path
+          schema:
+            type: string
+          required: true
+          example: d:_n:SIM60745_Wallbox-9166afa5
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/lppFSAPPL"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    $ref: "#/components/schemas/lppFSAPPL"
+                  success:
+                    type: boolean
+        '404':
+          description: no cem found
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+        '400':
+          description: there is Data  missing in the body
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+    patch:
+      tags:
+        - CEM
+      summary: modify Failsafe Active Power Production Limit to specific device
+      operationId: modifyFSAPPLToDevice
+      parameters:
+        - name: deviceAddress
+          in: path
+          schema:
+            type: string
+          required: true
+          example: d:_n:SIM60745_Wallbox-9166afa5
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/lppFSAPPL"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    $ref: "#/components/schemas/lppFSAPPL"
+                  success:
+                    type: boolean
+        '404':
+          description: no cem found
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+  /cem/ActivePowerProductionLimitConstraints:
+    get:
+      tags:
+        - CEM
+      summary: get Active Power Production Limit constraints from all devices
+      operationId: getLPPConstraints
+      responses:
+        '200':
+          description: successful response
+          content:
+            application/json:
+              schema:
+                type: array
+        '404':
+          description: no cem found
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+  /cem/latestSentHeartbeat:
+    get:
+      tags:
+        - CEM
+      summary: get the latest sent heartbeat
+      operationId: getCEMLatestSentHeartbeat
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HeartbeatData"
+        '404':
+          description: no CEM found
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+        '500':
+          description: LPC use case not supported
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+  /cem/latestReceivedHeartbeat/{deviceAddress}:
+    get:
+      tags:
+        - CEM
+      summary: get the information of the latest received heartbeat
+      operationId: getCEMLatestReceivedHeartbeat
+      parameters:
+        - name: deviceAddress
+          in: path
+          schema:
+            type: string
+          required: true
+          example: d:_n:SIM60745_Wallbox-9166afa5
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HeartbeatData"
+        '404':
+          description: no CEM found
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+        '500':
+          description: LPC use case not supported
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+  /cem/MpcMeasurementData:
+    get:
+      tags:
+        - CEM
+      summary: get the MPC use case measurement data from all connected devices
+      operationId: getMPCMeasurementData
+      responses:
+        '200':
+          description: successful response
+          content:
+            application/json:
+              schema:
+                type: array
+        '404':
+          description: no CEM found
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+  /realDevice:
+    post:
+      tags:
+        - Real Devices
+      summary: Add new Real device
+      operationId: addRealDevice
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/realDevice"
+      responses:
+        '200':
+          description: successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  id:
+                    type: integer
+        '400':
+          description: Invalid data entered
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+  /realDevices:
+    get:
+      tags:
+        - Real Devices
+      summary: List all the real devies added
+      operationId: listAllRealDevices
+      responses:
+        '200':
+          description: successful response
+          content:
+            application/json:
+              schema:
+                type: array
+  /realDevice/{deviceType}/{deviceId}:
+    get:
+      tags:
+        - Real Devices
+      summary: get specific real device
+      operationId: getRealDevice
+      parameters:
+        - name: deviceType
+          in: path
+          schema:
+            type: string
+          required: true
+          example: ChargingStation
+        - name: deviceId 
+          in: path
+          schema: 
+            type: integer
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/realDevice"
+        '400':
+          description: Invalid parameter data entered
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+        '404':
+          description: device not found
+          content:
+            application/json:
+              schema: 
+                 $ref: "#/components/schemas/statusError"
+    delete:
+      tags:
+        - Real Devices
+      summary: delete a real device
+      operationId: deleteRealDevice
+      parameters:
+        - name: deviceType
+          in: path
+          schema:
+            type: string
+          required: true
+          example: ChargingStation
+        - name: deviceId 
+          in: path
+          schema: 
+            type: integer
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/realDevice"
+        '400':
+          description: Invalid parameter data entered
           content:
             application/json:
               schema: 
@@ -2511,6 +3447,8 @@ components:
             - evseManufacturerData
             - currentLimits
             - currentMeasurements
+            - meterMeasurements
+            - evseFailsafeValues
         entityAddressType:
           type: object
           properties:
@@ -2962,5 +3900,95 @@ components:
           $ref: "#/components/schemas/MeasurementData"
         ChargingStatus:
           $ref: "#/components/schemas/ChargingStatus"
-
-        
+    APILoggingState:
+      title: the state of logging the APIs
+      type: object
+      properties:
+        status:
+          type: string
+        state:
+          type: string
+          enum:
+            - Running
+            - Stopped
+    lpcAPCL:
+      title: Active power consumption limit data point
+      type: object
+      properties:
+        active:
+          type: boolean
+        isLimitChangeable:
+          type: boolean
+        value:
+          type: integer
+        durationSeconds:
+          type: integer
+    FCAPL:
+      title: Failsafe consumption active power limit
+      type: object
+      properties:
+        isValueChangeable:
+          type: boolean
+        value:
+          type: integer
+        isDurationChangeable:
+          type: boolean
+        durationSeconds:
+          type: integer
+    EVSEPowerConstraints:
+      title: EVSE LPC power constraints value
+      type: object
+      properties:
+        powerConsumptionNominalMax:
+          type: integer
+    lppAPPL:
+      title: Active power Production limit data point
+      type: object
+      properties:
+        active:
+          type: boolean
+        isLimitChangeable:
+          type: boolean
+        value:
+          type: integer
+        durationSeconds:
+          type: integer
+    lppFSAPPL:
+      title: Failsafe consumption active power limit
+      type: object
+      properties:
+        isValueChangeable:
+          type: boolean
+        value:
+          type: integer
+        isDurationChangeable:
+          type: boolean
+        durationSeconds:
+          type: integer
+    realDevice:
+      title: Real device data
+      type: object
+      properties:
+        remoteSki:
+          type: string
+        deviceName:
+          type: string
+        imgBase64:
+          type: string
+        deviceType:
+          type: string
+          enum:
+            - Dishwasher
+            - Dryer
+            - EnvironmentSensor
+            - Generic
+            - HeatGenerationSystem
+            - HeatSinkSystem
+            - HeatStorageSystem
+            - HVACController
+            - SubMeter
+            - Washer
+            - ElectricitySupplySystem
+            - EnergyManagementSystem
+            - Inverter
+            - ChargingStation

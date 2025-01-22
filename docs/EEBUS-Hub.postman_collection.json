@@ -2029,7 +2029,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/evse/:evseId/state",
+							"raw": "localhost:8080/api/v1/evse/:evseId/lpcCurrentState",
 							"host": [
 								"localhost"
 							],
@@ -2039,35 +2039,7 @@
 								"v1",
 								"evse",
 								":evseId",
-								"state"
-							],
-							"variable": [
-								{
-									"key": "evseId",
-									"value": "1"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get EVSE Power Limit",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/api/v1/evse/:evseId/powerLimit",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"evse",
-								":evseId",
-								"powerLimit"
+								"lpcCurrentState"
 							],
 							"variable": [
 								{
@@ -2085,7 +2057,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/evse/:evseId/activePowerLimit",
+							"raw": "localhost:8080/api/v1/evse/:evseId/lpcActivePowerLimit",
 							"host": [
 								"localhost"
 							],
@@ -2095,7 +2067,7 @@
 								"v1",
 								"evse",
 								":evseId",
-								"activePowerLimit"
+								"lpcActivePowerLimit"
 							],
 							"variable": [
 								{
@@ -2141,7 +2113,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/evse/:evseId/lastSentHeartbeat",
+							"raw": "localhost:8080/api/v1/evse/:evseId/latestSentHeartbeat",
 							"host": [
 								"localhost"
 							],
@@ -2151,7 +2123,7 @@
 								"v1",
 								"evse",
 								":evseId",
-								"lastSentHeartbeat"
+								"latestSentHeartbeat"
 							],
 							"variable": [
 								{
@@ -2169,7 +2141,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/evse/:evseId/lastReceivedHeartbeat",
+							"raw": "localhost:8080/api/v1/evse/:evseId/latestReceivedHeartbeat",
 							"host": [
 								"localhost"
 							],
@@ -2179,7 +2151,7 @@
 								"v1",
 								"evse",
 								":evseId",
-								"lastReceivedHeartbeat"
+								"latestReceivedHeartbeat"
 							],
 							"variable": [
 								{
