@@ -22,3 +22,4 @@ All four scenarios represented in the EEBus documentation are supported:
 | LPC1 | Applying Active power consumption limit on simulated EVSE|
 | LPC2 | Applying Failsafe consumption active power simulated EVSE|
 | LPC3 | Applying Active power consumption limit and failsafe consumption power limit on external EVSE|
+| LPC4 | Applying Active power consumption limit on simulated EVSE associated with EV and monitor the EV Current|
