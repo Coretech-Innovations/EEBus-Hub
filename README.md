@@ -49,10 +49,10 @@ Also, for further info or support, you can contact us at: <eebus.hub@coretech-in
 |                                                       | Scenario 2 | ✅     | ✅     |
 |                                                       | Scenario 3 | ✅     | ✅     |
 |                                                       | Scenario 4 | ✅     | ✅     |
-| Limitation of power production (LPP) (EG only)        | Scenario 1 | ✅     | ✅     |
-|                                                       | Scenario 2 | ✅     | ✅     |
+| Limitation of power production (LPP) (EG only)        | Scenario 1 | -      | ✅     |
+|                                                       | Scenario 2 | -      | ✅     |
 |                                                       | Scenario 3 | ✅     | ✅     |
-|                                                       | Scenario 4 | ✅     | ✅     |
+|                                                       | Scenario 4 | -      | ✅     |
 |                                                       |            |               |               |
 | Monitoring of power consumption (MPC)                  | Scenario 1 | ✅     | ✅     |
 |                                                       | Scenario 2 |- | - |
