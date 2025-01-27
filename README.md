@@ -7,6 +7,8 @@ The simulation allows plugging in real devices besides the numerous simulated de
 
 You can [download](https://www.coretech-innovations.com/projects/eebushub/download) the tool for free under the MIT license.
 
+Release notes can be viewed [here](https://github.com/Coretech-Innovations/EEBus-Hub/wiki/Release-Notes).
+
 Also, for further info or support, you can contact us at: <eebus.hub@coretech-innovations.com>
 
 ## Supported Use Cases
