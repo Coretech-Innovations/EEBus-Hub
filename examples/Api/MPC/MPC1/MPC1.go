@@ -11,11 +11,12 @@ import (
 )
 
 type MeasurementData struct {
-	Energy    *float64                 `json:"energy,omitempty"`
-	Power     []MeasurementDataElement `json:"power,omitempty"`
-	Current   []MeasurementDataElement `json:"current,omitempty"`
-	Voltage   []MeasurementDataElement `json:"voltage,omitempty"`
-	Frequency *float64                 `json:"frequency,omitempty"`
+	EnergyConsumed *float64                 `json:"energyConsumed,omitempty"`
+	EnergyProduced *float64                 `json:"energyProduced,omitempty"`
+	Power          []MeasurementDataElement `json:"power,omitempty"`
+	Current        []MeasurementDataElement `json:"current,omitempty"`
+	Voltage        []MeasurementDataElement `json:"voltage,omitempty"`
+	Frequency      *float64                 `json:"frequency,omitempty"`
 }
 
 type MeasurementDataElement struct {
@@ -38,12 +39,18 @@ Device Address: %v
 }
 
 func (m MeasurementData) String() string {
-	var energy string
+	var energyConsumed string
+	var energyProduced string
 	var frequency string
-	if m.Energy == nil {
-		energy = "[]"
+	if m.EnergyConsumed == nil {
+		energyConsumed = "[]"
 	} else {
-		energy = fmt.Sprintf("%.3f", *m.Energy)
+		energyConsumed = fmt.Sprintf("%.3f", *m.EnergyConsumed)
+	}
+	if m.EnergyProduced == nil {
+		energyProduced = "[]"
+	} else {
+		energyProduced = fmt.Sprintf("%.3f", *m.EnergyProduced)
 	}
 	if m.Frequency == nil {
 		frequency = "[]"
@@ -52,12 +59,13 @@ func (m MeasurementData) String() string {
 	}
 	return fmt.Sprintf(`=================
 Power: %v
-Energy: %v
+Energy Consumed: %v
+Energy Produced: %v
 Current: %v
 Voltage: %v
 Frequency: %v
 =================`,
-		m.Power, energy, m.Current, m.Voltage, frequency)
+		m.Power, energyConsumed, energyProduced, m.Current, m.Voltage, frequency)
 }
 
 func (m MeasurementDataElement) String() string {
