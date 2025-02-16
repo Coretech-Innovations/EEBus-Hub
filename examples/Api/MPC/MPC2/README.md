@@ -2,7 +2,7 @@
 
 ## Description
 
-User Story: Simple script that infinitely queries MPC measurements retrieved by the simulated CEM. Provided in the script useful structs that helps interpret the retrieved data.
+User Story: Simple script that infinitely queries MPC measurements retrieved by the simulated CEM. Provided in the script useful structs that help interpret the retrieved data.
 
 ## How to run
 

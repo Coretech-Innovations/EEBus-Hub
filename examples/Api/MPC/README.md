@@ -9,7 +9,7 @@ This folder contains different examples to see the Monitoring of Power Consumpti
 
 ## Supported Scenarios
 
-All four scenarios represented in the EEBus documentation are supported:
+All five scenarios represented in the EEBus MPC technical specification are supported:
 
 - Power consumption/production
 - Energy consumed/produced

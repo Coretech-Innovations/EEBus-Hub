@@ -9,5 +9,5 @@ User Story: We are integrating an Energy Guard with an EVSE associated with EV a
 Change the BaseIPAddress in the script if required then execute
 
 ```batch
-go run .\examples\Api\MPC\MPC2\MPC2.go
+go run .\examples\Api\MPC\MPC1\MPC1.go
 ```
