@@ -1,24 +1,14 @@
-# LPC User Stories
 
-This folder contains different examples to see the Limitation of Power Consumption use case (LPC) in action
+# LPC1
 
-## Actors 
+## Description
 
-- Controllable system
-- Energy Guard
+User Story: We are integrating an Energy Guard with an EVSE and establishing their connection. Post-connection, we will monitor the active limit initial values in the EVSE.
 
-## Supported Scenarios
+Steps:
 
-All four scenarios represented in the EEBus documentation are supported:
-- Control active power consumption limit
-- Failsafe Values
-- Heartbeat
-- Constraints
+- Send Active Limit: Specify the value and duration.
 
-## Examples List
+- Update EVSE State: Ensure the EVSE reflects its new limit.
 
-| Example | Description|
-| :---- | :------ |
-| LPC1 | Applying Active power consumption limit on simulated EVSE|
-| LPC2 | Applying Failsafe consumption active power simulated EVSE|
-| LPC3 | Applying Active power consumption limit and failsafe consumption power limit on external EVSE|
+- Revert State: Once the duration elapses, the EVSE returns to its unlimited/controlled state.
