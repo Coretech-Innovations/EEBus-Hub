@@ -1,10 +1,12 @@
 # EEBus-Hub
 
-[EEBUS](https://eebus.org) framework to test integrating your device over an EEBUS network. It uses the versatile open-source stack [eebus-go](https://github.com/enbility/eebus-go) for EEBUS interactions and implementing different actors and use cases.
+EEBUS Hub is a testing and simulation framework for validating device integration over an EEBUS network. It builds on the [eebus-go](https://github.com/enbility/eebus-go) library for core EEBUS interactions and adds practical tooling to streamline real-world testing.
 
-The EEBus-Hub provides APIs to control different actors participating that may interact in an EEBUS environment e.g. EV, EVSE, HEMS, Energy Guard, SMGW,...
-The simulation allows plugging in real devices besides the numerous simulated devices to ease the testing of an EEBUS device.
+EEBUS Hub exposes APIs to control and orchestrate multiple EEBUS actors that participate in typical energy scenarios such as EV, EVSE, HEMS, Controlbox, Heatpump, Inverters and SMGW. You can run full simulations using built-in virtual devices, or plug in real hardware alongside simulated participants to accelerate integration, troubleshooting, and regression testing.
 
+This repository includes examples that show how to use EEBUS Hub programmatically to automate your EEBUS testing procedures—ideal for CI pipelines and repeatable test suites.
+
+Compliance support: EEBUS Hub helps manufacturers validate S14a compliance (and beyond) by enabling controlled, reproducible test scenarios and automated verification workflows.
 
 📩 Licensing: To obtain a license for EEBUS Hub, contact
 eebus.hub@coretech-innovations.com
