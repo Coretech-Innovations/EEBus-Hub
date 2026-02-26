@@ -12,55 +12,79 @@ eebus.hub@coretech-innovations.com
 Also, for further info or support, you can contact us at: <eebus.hub@coretech-innovations.com>
 
 ## Supported Use Cases
+| UseCase                                            | Scenarios | Server | Client | Usecase Category |
+| :------------------------------------------------- |:---------:|:------:|:------:|:----------------:|
+| Monitoring of Grid Connection Point (MGCP)       | Scenario 1  | - | - | Grid |
+|                                                  | Scenario 2  | ✅ | - |  |
+|                                                  | Scenario 3  | - | - |  |
+|                                                  | Scenario 4  | ✅ | - |  |
+|                                                  | Scenario 5  | ✅ | - |  |
+|                                                  | Scenario 6  | ✅ | - |  |
+|                                                  | Scenario 7  | ✅ | - |  |
+|                                                  |  |  |   |  |
+| Limitation of Power Consumption (LPC)            | Scenario 1  | ✅ | ✅ | Grid |
+|                                                  | Scenario 2  | ✅ | ✅ |  |
+|                                                  | Scenario 3  | ✅ | ✅ |  |
+|                                                  | Scenario 4  | ✅ | ✅ |  |
+|                                                  |  |  |   |  |
+| Limitation of Power Production (LPP)             | Scenario 1  | ✅ | ✅ | Grid |
+|                                                  | Scenario 2  | ✅ | ✅ |  |
+|                                                  | Scenario 3  | ✅ | ✅ |  |
+|                                                  | Scenario 4  | ✅ | ✅ |  |
+|                                                  |  |  |   |  |
+| Monitoring of Power Consumption (MPC)            | Scenario 1  | ✅ | ✅ | Grid |
+|                                                  | Scenario 2  | ✅ | ✅ |  |
+|                                                  | Scenario 3  | ✅ | ✅ |  |
+|                                                  | Scenario 4  | ✅ | ✅ |  |
+|                                                  | Scenario 5  | ✅ | ✅ |  |
+|                                                  |  |  |   |  |
+| EV Commissioning and Configuration (EVCC)        | Scenario 1  | ✅ | ✅ | E-mobility |
+|                                                  | Scenario 2  | - | - |  |
+|                                                  | Scenario 3  | - | - |  |
+|                                                  | Scenario 4  | - | - |  |
+|                                                  | Scenario 5  | - | - |  |
+|                                                  | Scenario 6  | ✅ | ✅ |  |
+|                                                  | Scenario 7  | ✅ | ✅ |  |
+|                                                  | Scenario 8  | ✅ | ✅ |  |
+|                                                  |  |  |   |  |
+| EVSE Commissioning and Configuration (EVSECC)    | Scenario 1  | ✅ | ✅ | E-mobility |
+|                                                  | Scenario 2  | ✅ | ✅ |  |
+|                                                  |  |  |  |  |
+| EV Charging Electricity Measurement (EVEM)       | Scenario 1  | ✅ | ✅ | E-mobility |
+|                                                  | Scenario 2  | - | - |  |
+|                                                  | Scenario 3  | - | - |  |
+|                                                  |  |  |   |  |
+| Overload Protection by EV current curtailment (OPEV)| Scenario 1 | ✅ | ✅ | E-mobility |
+|                                                  | Scenario 2  | ✅ | ✅ |  |
+|                                                  | Scenario 3  | ✅ | ✅ |  |
+|                                                  |  |  |   |  |
+| EV State of Charge (EVSOC)                       | Scenario 1  | ✅ | ✅ | E-mobility |
+|                                                  | Scenario 2  | ✅ | ✅ |  |
+|                                                  | Scenario 3  | ✅ | ✅ |  |
+|                                                  | Scenario 4  | ✅ | ✅ |  |
+| EV Charging Electricity Measurement (EVCEM)      | Scenario 1  | ✅ | ✅ | E-mobility |
+|                                                  | Scenario 2  | - | - |  |
+|                                                  |  |  |   |  |
+| Monitoring of Inverter (MOI)                     | Scenario 1  | ✅ | ✅ | Inverter |
+|                                                  | Scenario 2  | ✅ | ✅ |  |
+|                                                  | Scenario 3  | ✅ | ✅ |  |
+|                                                  | Scenario 4  | ✅ | ✅ |  |
+|                                                  | Scenario 5  | ✅ | ✅ |  |
+|                                                  | Scenario 6  | ✅ | ✅ |  |
+|                                                  | Scenario 7  | ✅ | ✅ |  |
+|                                                  |  |  |   |  |
+| Monitoring of Battery (MOB)                      | Scenario 1  | ✅ | ✅ | Inverter |
+|                                                  | Scenario 2  | ✅ | ✅ |  |
+|                                                  | Scenario 3  | ✅ | ✅ |  |
+|                                                  | Scenario 4  | ✅ | ✅ |  |
+|                                                  | Scenario 5  | ✅ | ✅ |  |
+|                                                  | Scenario 6  | ✅ | ✅ |  |
+|                                                  | Scenario 7  | ✅ | ✅ |  |
+|                                                  | Scenario 8  | ✅ | ✅ |  |
+|                                                  | Scenario 9  | ✅ | ✅ |  |
+| Optimization of Self-Consumption by Heat Pump Compressor Flexibility (OHPCF) | Scenario 1  | ✅ | ✅ | HVAC |
+|                                                  | Scenario 2  | ✅ | ✅ |  |
 
-| UseCase                                               | Scenarios  | Server        | Client        |
-| :---------------------------------------------------- |:---------- | :-----------: | :-----------: |
-| EV Commissioning and Configuration (EVCC)             | Scenario 1 | ✅     | ✅     |
-|                                                       | Scenario 2 | - | - |
-|                                                       | Scenario 3 | - | - |
-|                                                       | Scenario 4 | - | - |
-|                                                       | Scenario 5 | - | - |
-|                                                       | Scenario 6 | ✅     | ✅     |
-|                                                       | Scenario 7 | - | - |
-|                                                       | Scenario 8 | ✅     | ✅     |
-|                                                       |            |               |               |
-| EVSE Commissioning and Configuration (EVSECC)         | Scenario 1 | ✅ | ✅ |
-|                                                       | Scenario 2 | ✅     | ✅     |
-|                                                       |            |               |               |
-| EV Charging Electricity Measurement                   | Scenario 1 | ✅     | ✅     |
-|                                                       | Scenario 2 | - | - |
-|                                                       | Scenario 3 | - | - |
-|                                                       |            |               |               |
-| Overload Protection by EV current curtailment (OPEV)  | Scenario 1 | ✅     | ✅     |
-|                                                       | Scenario 2 | ✅     | ✅     |
-|                                                       | Scenario 3 | ✅     | ✅     |
-|                                                       |            |               |               |
-| EV State of Charge (EVSoC)                            | Scenario 1 | ✅     | ✅     |
-|                                                       | Scenario 2 | ✅     | ✅     |
-|                                                       | Scenario 3 | ✅     | ✅     |
-|                                                       | Scenario 4 | ✅     | ✅     |
-|                                                       |            |               |               |
-| Monitoring of Grid Connection Point                   | Scenario 1 | - | - |
-|                                                       | Scenario 2 | ✅     | ✅     |
-|                                                       | Scenario 3 | - | - |
-|                                                       | Scenario 4 | ✅     | ✅     |
-|                                                       | Scenario 5 | ✅     | ✅     |
-|                                                       | Scenario 6 | ✅     | ✅     |
-|                                                       | Scenario 7 | ✅     | ✅     |
-| Limitation of power consumption (LPC)                 | Scenario 1 | ✅     | ✅     |
-|                                                       | Scenario 2 | ✅     | ✅     |
-|                                                       | Scenario 3 | ✅     | ✅     |
-|                                                       | Scenario 4 | ✅     | ✅     |
-| Limitation of power production (LPP) (EG only)        | Scenario 1 | -      | ✅     |
-|                                                       | Scenario 2 | -      | ✅     |
-|                                                       | Scenario 3 | ✅     | ✅     |
-|                                                       | Scenario 4 | -      | ✅     |
-|                                                       |            |               |               |
-| Monitoring of power consumption (MPC)                  | Scenario 1 | ✅     | ✅     |
-|                                                       | Scenario 2 |✅ | ✅ |
-|                                                       | Scenario 3 | ✅     | ✅     |
-|                                                       | Scenario 4 |✅ | ✅ |
-|                                                       | Scenario 5 |✅ | ✅ |
 
 "✅" - Supported
 
