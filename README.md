@@ -7,7 +7,9 @@ This repository includes examples that show how to use EEBUS Hub programmaticall
 
 Compliance support: EEBUS Hub helps manufacturers validate S14a compliance (and beyond) by enabling controlled, reproducible test scenarios and automated verification workflows.
 
-Licensing: To obtain an EEBUS Hub license, contact eebus.hub@coretech-innovations.com
+Licensing: To obtain an EEBUS Hub license, contact us at eebus.hub@coretech-innovations.com
+
+For researchers, academics, and early-stage startups you can obtain a non-commercial licence by joining our Coretech EEBUS Innovation Program. Contact us for more details.
 
 
 ## Supported Use Cases
