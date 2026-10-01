@@ -19,23 +19,26 @@ For researchers, academics, and early-stage startups you can obtain a non-commer
 | Limitation of Power Consumption (LPC) | Grid | 1–4 | ✅ | ✅ |
 | Limitation of Power Production (LPP) | Grid | 1–4 | ✅ | ✅ |
 | Monitoring of Power Consumption (MPC) | Grid | 1–5 | ✅ | ✅ |
-| Monitoring of Grid Connection Point (MGCP) | Grid | 1–7 | — | — |
+| Monitoring of Grid Connection Point (MGCP) | Grid | 1–7¹ | ✅ | ✅ |
 | EV Commissioning and Configuration (EVCC) | E-mobility | 1,2,3,6,7,8 | ✅ | ✅ |
 | EVSE Commissioning and Configuration (EVSECC) | E-mobility | 1–2 | ✅ | ✅ |
 | Overload Protection by EV Current Curtailment (OPEV) | E-mobility | 1–3 | ✅ | ✅ |
 | EV State of Charge (EVSOC) | E-mobility | 1–4 | ✅ | ✅ |
 | EV Charging Electricity Measurement (EVCEM) | E-mobility | 1 | ✅ | ✅ |
-| Optimization of Self Consumption During EV Charging (OSCEV) | E-mobility | 1,2,3,4,5,6 | ✅ | ✅ |
+| Optimization of Self Consumption During EV Charging (OSCEV) | E-mobility | 1–6 | ✅ | ✅ |
 | Coordinated EV Charging (CEVC) | E-mobility | — | — | — |
 | Monitoring of Inverter (MOI) | Inverter | 1–7 | ✅ | ✅ |
 | Monitoring of Battery (MOB) | Inverter | 1–9 | ✅ | ✅ |
-| Monitoring of PV String (MPS) | Inverter | – | - | - |
-| Control of Battery (COB) | Inverter | 1-5 | ✅ | ✅ |
+| Monitoring of PV String (MPS) | Inverter | 1–6 | ✅ | ✅ |
+| Control of Battery (COB) | Inverter | 1–5 | ✅ | ✅ |
 | Optimization of Self-Consumption by Heat Pump Compressor Flexibility (OHPCF) | HVAC | 1–2 | ✅ | ✅ |
-| Incentive Table based Power Consumption Management (ITPCM) | HVAC | – | - | - |
+| Incentive Table based Power Consumption Management (ITPCM) | HVAC | — | — | — |
 | Node Identification (NID) | Generic | — | — | — |
 
 ✅ Supported &nbsp;&nbsp; — Not yet supported
+
+¹ As server (Grid Connection Point), MGCP supports scenarios 2–7; scenario 1 (PV feed-in power
+limitation factor) is supported as client only.
 
 ## Clone the project
 
