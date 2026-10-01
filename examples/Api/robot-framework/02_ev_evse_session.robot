@@ -26,26 +26,28 @@ ${EV_ID}      ${None}
 
 *** Test Cases ***
 Connect The EV To The EVSE
-    [Documentation]    ``Connect EV To EVSE`` takes two path parameters, passed
-    ...    positionally in the order evId, evseId. Pairing between the two
-    ...    simulated devices is asynchronous, so poll until it settles.
-    ${r}=    Connect EV To EVSE    ${EV_ID}    ${EVSE_ID}
+    [Documentation]    ``Connect EV To EVSE`` takes two path parameters, evId and
+    ...    evseId. Every generated keyword takes its arguments by name -- argument
+    ...    order follows the OpenAPI spec and is not stable across releases, so
+    ...    positional binding is refused. Pairing between the two simulated devices
+    ...    is asynchronous, so poll until it settles.
+    ${r}=    Connect EV To EVSE    evId=${EV_ID}    evseId=${EVSE_ID}
     Should Be Successful    ${r}
     Wait Until Keyword Succeeds    15x    2s    EV Reports A Connected EVSE
 
 Update The EV And Read It Back
     [Documentation]    ``Modify EV`` accepts a partial body; only the named fields
     ...    are sent. Then confirm the change is reflected when reading the entity.
-    ${updated}=    Modify EV    ${EV_ID}    charged=${42}    chargingEnable=${False}
+    ${updated}=    Modify EV    evId=${EV_ID}    charged=${42}    chargingEnable=${False}
     Should Be Successful    ${updated}
 
-    ${view}=    Get EV    ${EV_ID}
+    ${view}=    Get EV    evId=${EV_ID}
     Should Be Successful    ${view}
 
 Asking For A Nonexistent EV Fails Gracefully
     [Documentation]    A 4xx does not raise on its own; it returns with ``ok=False``.
     ...    That is how you assert on expected error paths.
-    ${r}=    Get EV    999999
+    ${r}=    Get EV    evId=999999
     Should Be Equal As Integers    ${r}[status_code]    404
     Should Not Be True    ${r}[ok]
 

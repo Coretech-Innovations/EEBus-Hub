@@ -34,7 +34,7 @@ Deactivation Limit Is Rejected Before Any Heartbeat
     ...    for it), so this is a single, deterministic write: with no heartbeat ever
     ...    received, the CS must reject it. A failure here means the CS wrongly accepted the
     ...    limit — not that the connection was not ready.
-    ${r}=    Send Active Power Consumption Limit To Device By HEMS    ${DEVICE_ADDRESS}    active=${False}
+    ${r}=    Send Active Power Consumption Limit To Device By HEMS    deviceAddress=${DEVICE_ADDRESS}    active=${False}
     Should Be Equal    ${r}[json][success]    ${False}    The CS accepted a limit without a heartbeat
     Should Contain    ${r}[json][reason]    No heartbeat received    ${r}[json][reason]
     # The rejected write must not have moved the CS into a controlled state.
@@ -45,7 +45,7 @@ Deactivation Limit Is Accepted After A Heartbeat Was Received
     ...    then stopped again), the same deactivation write is accepted and the CS moves
     ...    to Unlimited/Controlled.
     Send HEMS Heartbeat    ${EVSE_ID}
-    ${r}=    Send Active Power Consumption Limit To Device By HEMS    ${DEVICE_ADDRESS}    active=${False}    value=${0}
+    ${r}=    Send Active Power Consumption Limit To Device By HEMS    deviceAddress=${DEVICE_ADDRESS}    active=${False}    value=${0}
     Should Be Equal    ${r}[json][success]    ${True}    The CS rejected the limit: ${r}[json][reason]
     CS LPC State Should Be    ${EVSE_ID}    Unlimited/Controlled
 

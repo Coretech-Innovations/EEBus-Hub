@@ -33,7 +33,7 @@ Valid Active Limit Is Accepted And CS Becomes Limited
     [Documentation]    The connection is established and a heartbeat has been
     ...    received (both done in setup), so this is a single, deterministic write: a
     ...    well-formed active limit is accepted and drives the CS into the Limited state.
-    ${r}=    Send Active Power Consumption Limit To Device By HEMS    ${DEVICE_ADDRESS}
+    ${r}=    Send Active Power Consumption Limit To Device By HEMS    deviceAddress=${DEVICE_ADDRESS}
     ...    active=${True}    value=${LIMIT_WATTS}    durationIndefinite=${True}
     Should Be Equal    ${r}[json][success]    ${True}    The CS rejected a valid limit: ${r}[json][reason]
     CS LPC State Should Be    ${EVSE_ID}    Limited
@@ -41,7 +41,7 @@ Valid Active Limit Is Accepted And CS Becomes Limited
 Negative Limit Value Is Rejected And State Is Unchanged
     [Documentation]    A negative limit value is invalid; the CS must reject it
     ...    and remain in the Limited state it already reached.
-    ${r}=    Send Active Power Consumption Limit To Device By HEMS    ${DEVICE_ADDRESS}
+    ${r}=    Send Active Power Consumption Limit To Device By HEMS    deviceAddress=${DEVICE_ADDRESS}
     ...    active=${True}    value=${-1000}    durationIndefinite=${True}
     Should Be Equal    ${r}[json][success]    ${False}    The CS accepted a negative limit value
     Should Contain    ${r}[json][reason]    invalid data received

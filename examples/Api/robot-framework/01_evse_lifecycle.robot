@@ -7,7 +7,9 @@ Documentation     Example 1 - EVSE lifecycle (create / list / modify / delete).
 ...    - creating an entity with NO arguments (the Hub fills a valid default body),
 ...    - overriding only the fields you care about (friendly aliases, e.g.
 ...      ``nominalPowerMax`` maps to the nested ``nominalPower.max`` JSON field),
-...    - path parameters (the numeric entity id) passed positionally,
+...    - path parameters (the numeric entity id) passed by name, like every other
+...      argument — argument order follows the OpenAPI spec and is not stable across
+...      releases, so positional binding is refused,
 ...    - reading the result dictionary (``status_code`` / ``json`` / ``text`` / ``ok``).
 ...
 ...    Prerequisites: a Hub running with ``--robotremote`` and a license that has
@@ -30,7 +32,7 @@ Add EVSE With Defaults Then Find It In The List
     Should Be Successful    ${listing}
     ${ids}=    Evaluate    [item['evseId'] for item in $listing.get('json') or []]
     Should Contain    ${ids}    ${evse_id}    The created EVSE should appear in the list
-    [Teardown]    Delete EVSE    ${evse_id}
+    [Teardown]    Delete EVSE    evseId=${evse_id}
 
 Create EVSE Overriding Only The Fields I Care About
     [Documentation]    Pass just the fields you want to change; everything else keeps
@@ -40,7 +42,7 @@ Create EVSE Overriding Only The Fields I Care About
     ${created}=    Add EVSE    deviceName=Garage Wallbox    nominalPowerMax=${11000}
     Should Be Successful    ${created}
     ${evse_id}=    Set Variable    ${created}[json][id]
-    [Teardown]    Delete EVSE    ${evse_id}
+    [Teardown]    Delete EVSE    evseId=${evse_id}
 
 Modify A Single Field On An Existing EVSE
     [Documentation]    PATCH tolerates a partial body: the numeric id is a path
@@ -48,16 +50,16 @@ Modify A Single Field On An Existing EVSE
     ${created}=    Add EVSE
     ${evse_id}=    Set Variable    ${created}[json][id]
 
-    ${updated}=    Modify EVSE    ${evse_id}    nominalPowerMax=${16000}
+    ${updated}=    Modify EVSE    evseId=${evse_id}    nominalPowerMax=${16000}
     Should Be Successful    ${updated}
-    [Teardown]    Delete EVSE    ${evse_id}
+    [Teardown]    Delete EVSE    evseId=${evse_id}
 
 Delete EVSE Removes It From The List
     [Documentation]    After deletion the entity id must no longer be listed.
     ${created}=    Add EVSE
     ${evse_id}=    Set Variable    ${created}[json][id]
 
-    ${deleted}=    Delete EVSE    ${evse_id}
+    ${deleted}=    Delete EVSE    evseId=${evse_id}
     Should Be Successful    ${deleted}
 
     ${listing}=    List EVSEs
